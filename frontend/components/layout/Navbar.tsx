@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Zap, User as UserIcon, LogOut, LayoutDashboard } from 'lucide-react'
+import Image from 'next/image'
 import { cn } from '@/lib/utils/cn'
 import { GradientText } from '../common/GradientText'
 import { AnimatedButton } from '../common/AnimatedButton'
@@ -45,8 +46,13 @@ export function Navbar() {
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="p-2 bg-brand-base rounded-lg group-hover:bg-brand-purple transition-colors">
-            <Zap className="w-5 h-5 text-brand-yellow" />
+          <div className="relative w-10 h-10 overflow-hidden rounded-lg">
+            <Image 
+              src="/mainLogo.png" 
+              alt="TFX AI Logo" 
+              fill 
+              className="object-cover group-hover:scale-110 transition-transform duration-300" 
+            />
           </div>
           <span className="text-xl font-display font-bold tracking-tight text-white">
             TFX <GradientText>AI</GradientText>

@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   description: 'TFX AI is a premier AI agency building high-performance web applications, intelligent chatbots, and scalable SaaS solutions.',
   keywords: ['AI Agency', 'Web Development', 'Next.js 15', 'AI Solutions', 'SaaS Development', 'TFX AI'],
   authors: [{ name: 'TFX AI Team' }],
+  icons: {
+    icon: '/favicon.png',
+  },
   openGraph: {
     title: 'TFX AI | AI + Web Development Agency',
     description: 'Empowering businesses with cutting-edge AI and elite web engineering.',

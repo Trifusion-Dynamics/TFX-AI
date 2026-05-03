@@ -449,13 +449,22 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For support and questions:
-- 📧 Email: support@tfxai.com
-- 🐛 Issues: [GitHub Issues](https://github.com/your-repo/issues)
-- 📖 Docs: [Documentation](https://docs.tfxai.com)
+- 📧 Email: arun.builds.tech@gmail.com
+- 🐛 Issues: [GitHub Issues](https://github.com/Trifusion-Dynamics/TFX-AI/issues)
+- 📖 Docs: [Documentation](./docs/README.md)
+
+---
+
+## 👨‍💻 Developer
+
+**Arun Kumar Bind**
+- 📧 Email: arun.builds.tech@gmail.com
+- 🌐 GitHub: [Trifusion-Dynamics](https://github.com/Trifusion-Dynamics)
+- 💼 LinkedIn: [Arun Kumar Bind](https://linkedin.com/in/arun-kumar-bind)
 
 ---
 
 <div align="center">
-  <p>🚀 Built with ❤️ by TFX AI Team</p>
+  <p>🚀 Built with ❤️ by Arun Kumar Bind</p>
   <p>⭐ Star this repo if it helped you!</p>
 </div>

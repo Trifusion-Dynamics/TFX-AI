@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-base: #003f5c;
+    --color-purple-1: #58508d;
+    --color-purple-2: #8a508f;
+    --color-pink-1: #bc5090;
+    --color-pink-2: #de5a79;
+    --color-red: #ff6361;
+    --color-orange: #ff8531;
+    --color-yellow: #ffa600;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  
+  body {
+    @apply bg-dark-bg text-white font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    background: rgba(15, 15, 26, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(188, 80, 144, 0.2);
+    border-radius: 16px;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--color-pink-1), var(--color-red), var(--color-yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-purple-1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-pink-1);
+}
+
+/* Selection Color */
+::selection {
+  background: rgba(188, 80, 144, 0.3);
+  color: #fff;
+}

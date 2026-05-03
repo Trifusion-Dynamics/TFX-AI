@@ -45,8 +45,8 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center group">
-          <div className="relative h-20 w-16 overflow-hidden">
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="relative h-24 w-32 overflow-hidden">
             <Image 
               src="/mainLogo.png" 
               alt="TFX AI Logo" 
@@ -55,6 +55,9 @@ export function Navbar() {
               priority
             />
           </div>
+          <span className="text-xl font-display font-bold tracking-tight text-white">
+            TFX <GradientText>AI</GradientText>
+          </span>
         </Link>
 
         {/* Desktop Nav */}

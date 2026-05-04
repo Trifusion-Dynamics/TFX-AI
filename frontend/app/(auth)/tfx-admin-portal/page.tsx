@@ -15,7 +15,7 @@ import { Mail, Lock, Eye, EyeOff, Loader2, ArrowRight } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { cn } from '@/lib/utils/cn'
 
-export default function LoginPage() {
+export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
@@ -33,15 +33,15 @@ export default function LoginPage() {
     setIsLoading(true)
     try {
       const res = await authApi.login(data)
-      login(res.data.data.user, res.data.data.access_token)
+      const { user, access_token } = res.data.data
+      login(user, access_token)
       toast.success('Welcome back!')
       
-      if (res.data.data.user.role === 'admin') {
+      if (user.role === 'ADMIN' || user.role === 'admin') {
         router.push('/admin')
-
-
       } else {
-        router.push('/dashboard')
+        toast.error('Access denied. Admin only.')
+        logout()
       }
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Invalid email or password')
@@ -68,8 +68,8 @@ export default function LoginPage() {
 
         <GlassCard className="p-8 md:p-10 border-brand-pink/20">
           <div className="text-center mb-10">
-            <h1 className="text-3xl font-display font-bold text-white mb-2">Welcome Back</h1>
-            <p className="text-gray-400">Sign in to your TFX AI account</p>
+            <h1 className="text-3xl font-display font-bold text-white mb-2">Admin Portal</h1>
+            <p className="text-gray-400">Secure access for TFX AI administrators</p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -129,11 +129,8 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-8 pt-8 border-t border-white/10 text-center">
-            <p className="text-gray-400 text-sm">
-              Don&apos;t have an account?{' '}
-              <Link href="/register" className="text-brand-pink font-bold hover:underline">
-                Create Account
-              </Link>
+            <p className="text-gray-500 text-xs">
+              This is a restricted administrative area. Unauthorized access is prohibited.
             </p>
           </div>
         </GlassCard>

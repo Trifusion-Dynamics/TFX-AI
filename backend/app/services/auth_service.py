@@ -39,9 +39,12 @@ async def register_user(data: RegisterRequest, db: AsyncSession) -> UserResponse
         name=data.name,
         email=data.email,
         password=hashed_password,
-        role=UserRole.USER,
+        role=UserRole.USER, # This should be restricted
         is_verified=False
     )
+    
+    # Disable public registration
+    raise AppException(403, "Public registration is disabled. Please contact the administrator.")
     
     db.add(user)
     await db.flush()
@@ -112,6 +115,10 @@ async def login_user(data: LoginRequest, db: AsyncSession) -> TokenResponse:
     if not user.is_verified:
         raise AppException(403, "Please verify your email")
     
+    # Restrict to ADMIN role only
+    if user.role != UserRole.ADMIN:
+        raise AppException(403, "Access denied. Only administrators can log in.")
+    
     # Create tokens
     access_token = create_access_token(data={"sub": str(user.id)})
     refresh_token = create_refresh_token(data={"sub": str(user.id)})
@@ -121,11 +128,13 @@ async def login_user(data: LoginRequest, db: AsyncSession) -> TokenResponse:
     user.refresh_token = token_hash
     
     await db.commit()
+    await db.refresh(user)
     
     return TokenResponse(
         access_token=access_token,
         refresh_token=refresh_token,
-        token_type="bearer"
+        token_type="bearer",
+        user=UserResponse.model_validate(user)
     )
 
 

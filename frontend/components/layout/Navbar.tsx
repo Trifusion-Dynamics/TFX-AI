@@ -13,11 +13,13 @@ import { useAuthStore } from '@/lib/store/authStore'
 
 const NAV_LINKS = [
   { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
   { name: 'Services', href: '/services' },
   { name: 'Portfolio', href: '/portfolio' },
   { name: 'Blog', href: '/blog' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'AI Tools', href: '/ai-tools' },
+  { name: 'Careers', href: '/career' },
   { name: 'Contact', href: '/contact' },
 ]
 
@@ -100,9 +102,6 @@ export function Navbar() {
             </div>
           ) : (
             <>
-              <Link href="/login" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
-                Login
-              </Link>
               <AnimatedButton href="/contact" variant="outline" size="sm">
                 Get Started
               </AnimatedButton>
@@ -166,13 +165,6 @@ export function Navbar() {
                 </>
               ) : (
                 <div className="flex flex-col gap-2 mt-1 md:mt-2">
-                  <Link
-                    href="/login"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="px-3 py-2.5 text-sm font-medium text-center text-gray-300 hover:text-white bg-white/5 rounded-lg md:px-4 md:py-3"
-                  >
-                    Login
-                  </Link>
                   <AnimatedButton href="/contact" className="w-full justify-center">
                     Get Started
                   </AnimatedButton>

@@ -43,6 +43,8 @@ const NAV_GROUPS = [
         icon: MessageSquare,
       },
       { href: "/admin/case-studies", label: "Case Studies", icon: BookOpen },
+      { href: "/admin/jobs", label: "Jobs", icon: Briefcase },
+      { href: "/admin/applications", label: "Job Applications", icon: Users },
     ],
   },
   {

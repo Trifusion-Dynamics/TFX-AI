@@ -16,7 +16,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL('https://tfxai.com'),
   title: {
-    default: 'TFX AI | AI + Web Development Agency',
+    default: 'TFX AI | AI-Powered Solutions for Modern Businesses',
     template: '%s | TFX AI'
   },
   description: 'TFX AI is a premier AI agency building high-performance web applications, intelligent chatbots, and scalable SaaS solutions.',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     icon: '/favicon.png',
   },
   openGraph: {
-    title: 'TFX AI | AI + Web Development Agency',
+    title: 'TFX AI | AI-Powered Solutions for Modern Businesses',
     description: 'Empowering businesses with cutting-edge AI and elite web engineering.',
     url: 'https://tfxai.com',
     siteName: 'TFX AI',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TFX AI | AI + Web Development Agency',
+    title: 'TFX AI | AI-Powered Solutions for Modern Businesses',
     description: 'Empowering businesses with cutting-edge AI and elite web engineering.',
     creator: '@tfxai',
   },

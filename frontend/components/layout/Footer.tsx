@@ -58,6 +58,7 @@ export function Footer() {
               <li><Link href="/portfolio" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Our Work</Link></li>
               <li><Link href="/pricing" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Pricing</Link></li>
               <li><Link href="/contact" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Contact</Link></li>
+              <li><Link href="/career" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Careers</Link></li>
             </ul>
           </div>
 
@@ -104,6 +105,9 @@ export function Footer() {
             </Link>
             <Link href="/terms" className="text-xs text-gray-500 hover:text-gray-300 transition-colors">
               Terms of Service
+            </Link>
+            <Link href="/sitemap" className="text-xs text-gray-500 hover:text-gray-300 transition-colors">
+              Sitemap
             </Link>
           </div>
         </div>

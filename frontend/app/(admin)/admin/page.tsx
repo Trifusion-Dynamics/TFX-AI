@@ -16,37 +16,79 @@ import {
   Clock
 } from 'lucide-react'
 import { cn } from '@/lib/utils/cn'
+import { adminApi } from '@/lib/api/admin.api'
+import toast from 'react-hot-toast'
 
 export default function AdminDashboard() {
   const [loading, setLoading] = useState(true)
+  const [stats, setStats] = useState<any>(null)
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1000)
+    const fetchStats = async () => {
+      try {
+        const res = await adminApi.getStats()
+        setStats(res.data)
+      } catch (error) {
+        console.error('Failed to fetch stats:', error)
+        toast.error('Failed to load dashboard data')
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchStats()
   }, [])
 
-  const RECENT_LEADS = [
-    { name: 'Arun Kumar', email: 'arun@example.com', subject: 'AI Chatbot Inquiry', status: 'NEW', date: '2024-05-03' },
-    { name: 'John Doe', email: 'john@gmail.com', subject: 'Web App Dev', status: 'IN_PROGRESS', date: '2024-05-02' },
-    { name: 'Sarah Wilson', email: 'sarah@tfx.ai', subject: 'UI/UX Design', status: 'RESOLVED', date: '2024-05-01' },
-    { name: 'Mike Ross', email: 'mike@legals.com', subject: 'SaaS Platform', status: 'NEW', date: '2024-04-30' },
-  ]
-
-  const RECENT_USERS = [
-    { name: 'Amit Singh', email: 'amit@test.com', role: 'user', verified: true, date: '2 hours ago' },
-    { name: 'Priya Raj', email: 'priya@web.in', role: 'user', verified: false, date: '5 hours ago' },
-    { name: 'Admin TFX', email: 'admin@tfxai.com', role: 'admin', verified: true, date: '1 day ago' },
-  ]
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    })
+  }
 
   return (
     <div className="space-y-10">
       {/* Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
-        <StatsCard title="Total Users" value={1250} icon={<Users className="w-6 h-6" />} change={12} color="blue" />
-        <StatsCard title="Total Leads" value={458} icon={<Mail className="w-6 h-6" />} change={8} color="pink" />
-        <StatsCard title="New Leads" value={24} icon={<UserPlus className="w-6 h-6" />} change={15} color="orange" />
-        <StatsCard title="Blog Posts" value={156} icon={<FileText className="w-6 h-6" />} change={5} color="purple" />
-        <StatsCard title="Projects" value={42} icon={<FolderKanban className="w-6 h-6" />} change={2} color="yellow" />
-        <StatsCard title="AI Usages" value={8540} icon={<Brain className="w-6 h-6" />} change={24} color="blue" />
+        <StatsCard 
+          title="Total Users" 
+          value={stats?.users?.total || 0} 
+          icon={<Users className="w-6 h-6" />} 
+          change={stats?.users?.this_month || 0} 
+          color="blue" 
+        />
+        <StatsCard 
+          title="Total Leads" 
+          value={stats?.leads?.total || 0} 
+          icon={<Mail className="w-6 h-6" />} 
+          change={stats?.leads?.this_month || 0} 
+          color="pink" 
+        />
+        <StatsCard 
+          title="New Leads" 
+          value={stats?.leads?.new || 0} 
+          icon={<UserPlus className="w-6 h-6" />} 
+          color="orange" 
+        />
+        <StatsCard 
+          title="Blog Posts" 
+          value={stats?.blog?.total || 0} 
+          icon={<FileText className="w-6 h-6" />} 
+          color="purple" 
+        />
+        <StatsCard 
+          title="Projects" 
+          value={stats?.projects?.total || 0} 
+          icon={<FolderKanban className="w-6 h-6" />} 
+          color="yellow" 
+        />
+        <StatsCard 
+          title="AI Usages" 
+          value={stats?.ai_tools?.total_usage || 0} 
+          icon={<Brain className="w-6 h-6" />} 
+          change={stats?.ai_tools?.this_month || 0} 
+          color="blue" 
+        />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -87,20 +129,20 @@ export default function AdminDashboard() {
           <div className="flex justify-center mb-8">
             <div className="relative w-48 h-48">
               <svg className="w-full h-full -rotate-90">
-                <circle cx="96" cy="96" r="80" fill="none" stroke="#22c55e" strokeWidth="12" strokeDasharray="502" strokeDashoffset="100" />
-                <circle cx="96" cy="96" r="80" fill="none" stroke="#eab308" strokeWidth="12" strokeDasharray="502" strokeDashoffset="350" />
-                <circle cx="96" cy="96" r="80" fill="none" stroke="#3b82f6" strokeWidth="12" strokeDasharray="502" strokeDashoffset="450" />
+                <circle cx="96" cy="96" r="80" fill="none" stroke="#3b82f6" strokeWidth="12" strokeDasharray="502" strokeDashoffset={502 - (502 * (stats?.leads?.new || 0) / (stats?.leads?.total || 1))} />
+                <circle cx="96" cy="96" r="80" fill="none" stroke="#eab308" strokeWidth="12" strokeDasharray="502" strokeDashoffset={502 - (502 * (stats?.leads?.in_progress || 0) / (stats?.leads?.total || 1))} />
+                <circle cx="96" cy="96" r="80" fill="none" stroke="#22c55e" strokeWidth="12" strokeDasharray="502" strokeDashoffset={502 - (502 * (stats?.leads?.resolved || 0) / (stats?.leads?.total || 1))} />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-3xl font-black text-white">458</span>
+                <span className="text-3xl font-black text-white">{stats?.leads?.total || 0}</span>
                 <span className="text-[10px] text-gray-500 uppercase font-bold">Total</span>
               </div>
             </div>
           </div>
           <div className="space-y-3">
-             <StatusLegend label="New" color="bg-blue-500" value="45" />
-             <StatusLegend label="In Progress" color="bg-yellow-500" value="124" />
-             <StatusLegend label="Resolved" color="bg-green-500" value="289" />
+             <StatusLegend label="New" color="bg-blue-500" value={stats?.leads?.new || 0} />
+             <StatusLegend label="In Progress" color="bg-yellow-500" value={stats?.leads?.in_progress || 0} />
+             <StatusLegend label="Resolved" color="bg-green-500" value={stats?.leads?.resolved || 0} />
           </div>
         </GlassCard>
       </div>
@@ -131,9 +173,9 @@ export default function AdminDashboard() {
                   </span>
                 )
               },
-              { key: 'date', label: 'Date' }
+              { key: 'created_at', label: 'Date', render: (val: any) => formatDate(val) }
             ]}
-            data={RECENT_LEADS}
+            data={stats?.recent_leads || []}
             loading={loading}
           />
         </GlassCard>
@@ -169,20 +211,20 @@ export default function AdminDashboard() {
                 render: (val: any) => (
                   <span className={cn(
                     "px-2 py-0.5 rounded text-[10px] font-bold",
-                    val === 'admin' ? 'bg-brand-purple/20 text-brand-purple' : 'bg-white/10 text-gray-400'
+                    val === 'ADMIN' ? 'bg-brand-purple/20 text-brand-purple' : 'bg-white/10 text-gray-400'
                   )}>
                     {val}
                   </span>
                 )
               },
               { 
-                key: 'verified', 
+                key: 'is_verified', 
                 label: 'Verified',
                 render: (val: any) => val ? <Clock className="w-4 h-4 text-green-500" /> : <Clock className="w-4 h-4 text-gray-600" />
               },
-              { key: 'date', label: 'Joined' }
+              { key: 'created_at', label: 'Joined', render: (val: any) => formatDate(val) }
             ]}
-            data={RECENT_USERS}
+            data={stats?.recent_users || []}
             loading={loading}
           />
         </GlassCard>
@@ -195,15 +237,10 @@ export default function AdminDashboard() {
           <button className="text-brand-pink text-xs font-bold hover:underline">View Analytics</button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { title: 'The Future of AI in SaaS', views: 4250, category: 'AI', trend: '+12%' },
-            { title: 'Next.js 15 Masterclass', views: 3820, category: 'Web', trend: '+18%' },
-            { title: 'Designing for the Dark Mode', views: 2100, category: 'UI/UX', trend: '+5%' },
-          ].map((blog, i) => (
+          {(stats?.top_blogs || []).map((blog: any, i: number) => (
             <div key={i} className="p-4 bg-white/5 rounded-2xl border border-white/5 hover:border-brand-pink/30 transition-all group">
               <div className="flex justify-between items-start mb-4">
-                 <span className="text-[10px] font-black text-brand-pink bg-brand-pink/10 px-2 py-1 rounded">{blog.category}</span>
-                 <span className="text-green-500 text-[10px] font-bold">{blog.trend}</span>
+                 <span className="text-[10px] font-black text-brand-pink bg-brand-pink/10 px-2 py-1 rounded">BLOG</span>
               </div>
               <h4 className="text-white font-bold mb-4 line-clamp-1 group-hover:text-brand-pink transition-colors">{blog.title}</h4>
               <div className="flex items-center gap-2 text-gray-500">
@@ -212,6 +249,9 @@ export default function AdminDashboard() {
               </div>
             </div>
           ))}
+          {(!stats?.top_blogs || stats?.top_blogs.length === 0) && (
+            <div className="col-span-3 text-center py-10 text-gray-500 italic">No blog data available</div>
+          )}
         </div>
       </GlassCard>
     </div>
@@ -228,4 +268,5 @@ function StatusLegend({ label, color, value }: any) {
     </div>
   )
 }
+
 

@@ -22,20 +22,20 @@ from typing import Dict
 router = APIRouter()
 security = HTTPBearer()
 
-@router.post("/register", response_model=ApiResponse[UserResponse], status_code=status.HTTP_201_CREATED)
-async def register(
-    data: RegisterRequest,
-    db: AsyncSession = Depends(get_db)
-):
-    """
-    Register a new user.
-    """
-    user = await register_user(data, db)
-    return ApiResponse(
-        success=True,
-        message="User registered successfully. Please check your email for verification.",
-        data=user
-    )
+# @router.post("/register", response_model=ApiResponse[UserResponse], status_code=status.HTTP_201_CREATED)
+# async def register(
+#     data: RegisterRequest,
+#     db: AsyncSession = Depends(get_db)
+# ):
+#     """
+#     Register a new user.
+#     """
+#     user = await register_user(data, db)
+#     return ApiResponse(
+#         success=True,
+#         message="User registered successfully. Please check your email for verification.",
+#         data=user
+#     )
 
 
 @router.get("/verify-email", response_model=ApiResponse[Dict])

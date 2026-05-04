@@ -31,6 +31,7 @@ from app.api.v1.routes import (
     case_study,
     ai_tools,
     admin,
+    job,
 )
 
 # Configure logging
@@ -103,7 +104,13 @@ app.add_middleware(SlowAPIMiddleware)
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.client_url, "http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=[
+        settings.client_url,
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -188,6 +195,7 @@ app.include_router(pricing.router, prefix="/api/v1/pricing", tags=["Pricing"])
 app.include_router(case_study.router, prefix="/api/v1/case-studies", tags=["Case Studies"])
 app.include_router(ai_tools.router, prefix="/api/v1/ai-tools", tags=["AI Tools"])
 app.include_router(admin.router, prefix="/api/v1/admin", tags=["Admin"])
+app.include_router(job.router, prefix="/api/v1/jobs", tags=["Jobs"])
 
 # Graceful shutdown event handler
 @app.on_event("shutdown")

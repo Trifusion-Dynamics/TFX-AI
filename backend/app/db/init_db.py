@@ -14,6 +14,7 @@ from app.models.pricing import PricingPlan, BillingCycle
 from app.models.testimonial import Testimonial
 from app.models.blog import BlogPost
 from app.models.case_study import CaseStudy
+from app.models.job import Job, JobStatus
 from app.core.security import hash_password
 import logging
 
@@ -32,7 +33,7 @@ async def seed_database(db: AsyncSession):
         result = await db.execute(
             select(User).where(User.email == "admin@tfxai.com")
         )
-        admin_user = result.scalar_one_or_none()
+        admin_user = result.scalars().first()
         
         if admin_user is None:
             admin_user = User(
@@ -55,7 +56,7 @@ async def seed_database(db: AsyncSession):
         result = await db.execute(
             select(User).where(User.email == "test@tfxai.com")
         )
-        test_user = result.scalar_one_or_none()
+        test_user = result.scalars().first()
         
         if test_user is None:
             test_user = User(
@@ -146,7 +147,7 @@ async def seed_database(db: AsyncSession):
             result = await db.execute(
                 select(Service).where(Service.slug == service_data["slug"])
             )
-            existing = result.scalar_one_or_none()
+            existing = result.scalars().first()
             
             if existing is None:
                 service = Service(**service_data)
@@ -197,7 +198,7 @@ async def seed_database(db: AsyncSession):
             result = await db.execute(
                 select(Project).where(Project.slug == project_data["slug"])
             )
-            existing = result.scalar_one_or_none()
+            existing = result.scalars().first()
             
             if existing is None:
                 project = Project(**project_data)
@@ -261,7 +262,7 @@ async def seed_database(db: AsyncSession):
             result = await db.execute(
                 select(PricingPlan).where(PricingPlan.slug == pricing_info["slug"])
             )
-            existing = result.scalar_one_or_none()
+            existing = result.scalars().first()
             
             if existing is None:
                 plan = PricingPlan(**pricing_info)
@@ -303,7 +304,7 @@ async def seed_database(db: AsyncSession):
             result = await db.execute(
                 select(Testimonial).where(Testimonial.name == testimonial_info["name"])
             )
-            existing = result.scalar_one_or_none()
+            existing = result.scalars().first()
             
             if existing is None:
                 testimonial = Testimonial(**testimonial_info)
@@ -362,7 +363,7 @@ If you're still relying on traditional customer support methods, it's time to co
             result = await db.execute(
                 select(BlogPost).where(BlogPost.slug == blog_info["slug"])
             )
-            existing = result.scalar_one_or_none()
+            existing = result.scalars().first()
             
             if existing is None:
                 blog_post = BlogPost(**blog_info)
@@ -392,12 +393,50 @@ If you're still relying on traditional customer support methods, it's time to co
         result = await db.execute(
             select(CaseStudy).where(CaseStudy.slug == case_study_data["slug"])
         )
-        existing = result.scalar_one_or_none()
+        existing = result.scalars().first()
         
         if existing is None:
             case_study = CaseStudy(**case_study_data)
             db.add(case_study)
             logger.info(f"Case study created: {case_study_data['title']}")
+        
+        # === LEADS (CONTACTS) ===
+        from app.models.lead import Lead
+        leads_data = [
+            {
+                "name": "Alice Johnson",
+                "email": "alice@example.com",
+                "phone": "+1234567890",
+                "subject": "AI Chatbot Inquiry",
+                "message": "I'm interested in a custom AI chatbot for my e-commerce site.",
+                "status": "NEW"
+            },
+            {
+                "name": "Bob Smith",
+                "email": "bob@example.com",
+                "subject": "Web Development Project",
+                "message": "Looking to build a new SaaS platform. Can we schedule a call?",
+                "status": "IN_PROGRESS"
+            },
+            {
+                "name": "Charlie Brown",
+                "email": "charlie@example.com",
+                "subject": "Partnership Opportunity",
+                "message": "Interested in partnering with TFX AI for AI solutions.",
+                "status": "RESOLVED"
+            }
+        ]
+        
+        for lead_info in leads_data:
+            result = await db.execute(
+                select(Lead).where(Lead.email == lead_info["email"])
+            )
+            existing = result.scalars().first()
+            
+            if existing is None:
+                lead = Lead(**lead_info)
+                db.add(lead)
+                logger.info(f"Lead created: {lead_info['name']}")
         
         # === SITE CONFIG ===
         site_configs = {
@@ -423,6 +462,39 @@ If you're still relying on traditional customer support methods, it's time to co
                 config = SiteConfig(key=key, value=str(value))
                 db.add(config)
                 logger.info(f"Site config created: {key}")
+
+        # === JOBS ===
+        jobs_data = [
+            {
+                "title": "Senior AI Engineer",
+                "description": "We are looking for a Senior AI Engineer to lead our LLM development team. You will be responsible for designing and implementing state-of-the-art AI solutions for our clients.",
+                "requirements": "- 5+ years of experience in AI/ML\n- Strong proficiency in Python and PyTorch/TensorFlow\n- Experience with LLMs (GPT, Llama, etc.)\n- Proven track record of delivering AI products",
+                "location": "Remote",
+                "type": "Full-time",
+                "salary_range": "₹25L - ₹40L",
+                "status": JobStatus.OPEN
+            },
+            {
+                "title": "Full Stack Developer",
+                "description": "Join our dynamic team as a Full Stack Developer. You'll work on cutting-edge web applications using Next.js and FastAPI.",
+                "requirements": "- 3+ years of experience in full stack development\n- Proficiency in TypeScript, React, and Python\n- Experience with PostgreSQL and Redis\n- Strong problem-solving skills",
+                "location": "Noida, India",
+                "type": "Full-time",
+                "salary_range": "₹15L - ₹25L",
+                "status": JobStatus.OPEN
+            }
+        ]
+
+        for job_info in jobs_data:
+            result = await db.execute(
+                select(Job).where(Job.title == job_info["title"])
+            )
+            existing = result.scalars().first()
+            
+            if existing is None:
+                job = Job(**job_info)
+                db.add(job)
+                logger.info(f"Job created: {job_info['title']}")
         
         await db.commit()
         logger.info("Database seeded successfully with full realistic data!")

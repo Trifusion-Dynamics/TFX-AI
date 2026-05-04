@@ -1,49 +1,72 @@
-import { Navbar } from '@/components/layout/Navbar'
-import { Footer } from '@/components/layout/Footer'
-import { SectionHeading } from '@/components/common/SectionHeading'
+"use client"
 
-export const metadata = {
-  title: 'Privacy Policy | TFX AI',
-  description: 'Learn how TFX AI collects, uses, and protects your personal data.',
-}
+import React from 'react'
+import { motion } from 'framer-motion'
+import { Shield, Lock, Eye, Bell, Globe, Cookie } from 'lucide-react'
+import { GradientText } from '@/components/common/GradientText'
 
 export default function PrivacyPage() {
+  const sections = [
+    {
+      title: "Information We Collect",
+      icon: <Lock className="w-5 h-5" />,
+      content: "We collect information you provide directly to us, such as when you create an account, fill out a contact form, or apply for a job. This may include your name, email address, phone number, and professional history."
+    },
+    {
+      title: "How We Use Information",
+      icon: <Eye className="w-5 h-5" />,
+      content: "We use the information we collect to provide, maintain, and improve our services, to process job applications, and to communicate with you about updates and project requests."
+    },
+    {
+      title: "Data Security",
+      icon: <Shield className="w-5 h-5" />,
+      content: "We take reasonable measures to help protect information about you from loss, theft, misuse, and unauthorized access, disclosure, alteration, and destruction."
+    },
+    {
+      title: "Cookie Policy",
+      icon: <Cookie className="w-5 h-5" />,
+      content: "We use cookies and similar technologies to track activity on our service and hold certain information to improve your experience."
+    }
+  ]
+
   return (
-    <>
-      <Navbar />
-      <main className="flex-1 pt-32 pb-24">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <SectionHeading
-            badge="Legal"
-            title="Privacy Policy"
-            className="mb-12"
-          />
-          
-          <div className="prose prose-invert prose-pink max-w-none">
-            <p className="text-gray-400 mb-8 italic">Last Updated: March 15, 2024</p>
-            
-            <h2>1. Introduction</h2>
-            <p>Welcome to TFX AI (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.</p>
-            
-            <h2>2. Information We Collect</h2>
-            <p>We collect personal information that you voluntarily provide to us when you express an interest in obtaining information about us or our products and services, when you participate in activities on our website or otherwise when you contact us.</p>
-            <ul>
-              <li><strong>Personal Data:</strong> Names, phone numbers, email addresses, mailing addresses, job titles, and other similar information.</li>
-              <li><strong>Usage Data:</strong> We may collect information about your interaction with our website, such as pages visited, time spent, and other diagnostic data.</li>
-            </ul>
+    <div className="min-h-screen bg-dark-bg pt-24 pb-20 relative">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-16">
+            <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
+              Privacy <GradientText>Policy</GradientText>
+            </h1>
+            <p className="text-gray-400">Last Updated: May 2026</p>
+          </div>
 
-            <h2>3. How We Use Your Information</h2>
-            <p>We use personal information collected via our website for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations.</p>
-            
-            <h2>4. Security of Your Information</h2>
-            <p>We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable.</p>
+          <div className="space-y-8">
+            {sections.map((section, idx) => (
+              <motion.div
+                key={section.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                className="bg-dark-card/30 border border-dark-border p-8 rounded-3xl"
+              >
+                <div className="flex items-center gap-3 mb-4 text-brand-pink">
+                  {section.icon}
+                  <h2 className="text-xl font-bold text-white">{section.title}</h2>
+                </div>
+                <p className="text-gray-400 leading-relaxed">
+                  {section.content}
+                </p>
+              </motion.div>
+            ))}
+          </div>
 
-            <h2>5. Contact Us</h2>
-            <p>If you have questions or comments about this policy, you may email us at privacy@tfxai.com.</p>
+          <div className="mt-12 p-8 bg-brand-purple/5 border border-brand-purple/20 rounded-3xl">
+            <p className="text-sm text-gray-400 text-center">
+              If you have any questions about this Privacy Policy, please contact us at privacy@tfxai.com.
+            </p>
           </div>
         </div>
-      </main>
-      <Footer />
-    </>
+      </div>
+    </div>
   )
 }

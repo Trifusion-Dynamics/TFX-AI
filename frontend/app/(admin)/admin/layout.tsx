@@ -11,14 +11,15 @@ import { cn } from '@/lib/utils/cn'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
 
+  const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
+
   const { user, isAuthenticated } = useAuthStore()
   const router = useRouter()
   const [isChecking, setIsChecking] = useState(true)
 
   useEffect(() => {
-    if (!isAuthenticated || user?.role !== 'admin') {
-
+    if (!isAuthenticated || user?.role !== 'ADMIN') {
       router.push('/login')
     } else {
       setIsChecking(false)
@@ -32,8 +33,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </div>
     )
   }
-
-  const [isMobileOpen, setIsMobileOpen] = useState(false)
 
   return (
     <div className="min-h-screen bg-[#050508] text-white">

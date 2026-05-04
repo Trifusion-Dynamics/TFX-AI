@@ -13,6 +13,7 @@ from app.models.pricing import PricingPlan
 from app.models.case_study import CaseStudy
 from app.models.ai_tool_usage import AIToolUsage
 from app.models.site_config import SiteConfig
+from app.models.job import Job, JobApplication
 
 __all__ = [
     "User",
@@ -25,5 +26,7 @@ __all__ = [
     "PricingPlan",
     "CaseStudy",
     "AIToolUsage",
-    "SiteConfig"
+    "SiteConfig",
+    "Job",
+    "JobApplication"
 ]

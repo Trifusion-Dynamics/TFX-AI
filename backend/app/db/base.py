@@ -17,7 +17,10 @@ engine = create_async_engine(
     future=True,
     pool_pre_ping=True,
     pool_recycle=3600,
-    connect_args={"statement_cache_size": 0}
+    connect_args={
+        "statement_cache_size": 0,
+        "ssl": True if "neon.tech" in (settings.database_url or "") else False
+    }
 )
 
 # Create async session factory

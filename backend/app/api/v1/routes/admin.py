@@ -358,10 +358,15 @@ async def get_ai_tools_stats(
 
 
 # Dashboard route
-@router.get("/dashboard", response_model=dict)
+@router.get("/stats", response_model=ApiResponse)
 async def get_dashboard_stats(
     admin_service: AdminService = Depends(get_admin_service),
     current_user: User = Depends(get_current_admin)
 ):
     """Get dashboard statistics."""
-    return await admin_service.get_dashboard_stats()
+    stats = await admin_service.get_dashboard_stats()
+    return ApiResponse(
+        success=True,
+        message="Dashboard statistics retrieved successfully",
+        data=stats
+    )

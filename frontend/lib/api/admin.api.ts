@@ -5,14 +5,15 @@ export const adminApi = {
   getStats: () => api.get<ApiResponse<any>>('/admin/stats'),
   
   // Leads
-  getLeads: (params?: any) => api.get<ApiResponse<any>>('/admin/leads', { params }),
-  updateLeadStatus: (id: string, status: string) => api.patch(`/admin/leads/${id}/status`, { status }),
-  deleteLead: (id: string) => api.delete(`/admin/leads/${id}`),
+  getLeads: (params?: any) => api.get<ApiResponse<any>>('/contact/admin/leads', { params }),
+  updateLeadStatus: (id: string, status: string) => api.patch(`/contact/admin/leads/${id}/status`, { status }),
+  deleteLead: (id: string) => api.delete(`/contact/admin/leads/${id}`),
+  getLeadStats: () => api.get<ApiResponse<any>>('/contact/admin/leads/stats'),
 
   // Users
-  getUsers: (params?: any) => api.get<ApiResponse<any>>('/admin/users', { params }),
-  updateUserRole: (id: string, role: string) => api.patch(`/admin/users/${id}/role`, { role }),
-  deleteUser: (id: string) => api.delete(`/admin/users/${id}`),
+  getUsers: (params?: any) => api.get<ApiResponse<any>>('/users/admin/users', { params }),
+  updateUserRole: (id: string, role: string) => api.patch(`/users/admin/users/${id}/role`, { role }),
+  deleteUser: (id: string) => api.delete(`/users/admin/users/${id}`),
 
   // Generic Content (simplified for now)
   getItems: (type: string, params?: any) => api.get<ApiResponse<any>>(`/admin/${type}`, { params }),

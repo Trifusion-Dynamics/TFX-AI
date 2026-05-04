@@ -10,6 +10,7 @@ from typing import Optional, List, Dict, Any
 from datetime import datetime, timedelta
 import logging
 import asyncio
+from app.core.config import settings
 
 from app.models.lead import Lead, LeadStatus
 from app.models.user import User
@@ -90,9 +91,9 @@ class ContactService:
         <p><strong>Submitted:</strong> {lead.created_at.strftime('%Y-%m-%d %H:%M:%S')}</p>
         """
         
-        # Send to admin email (you might want to get this from config)
+        # Send to admin email
         await send_email(
-            to_email="admin@tfxai.com",  # Replace with actual admin email
+            to_email=settings.admin_email,
             subject=subject,
             html_content=html_content
         )

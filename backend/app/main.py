@@ -68,13 +68,13 @@ async def lifespan(app: FastAPI):
     
     # Startup banner
     print(f"""
-╔══════════════════════════════════╗
-║   🚀 TFX AI Backend Running      ║
-║   Port: {settings.app_port}                   ║
-║   Env:  {settings.app_env}                    ║
-║   Docs: /docs                    ║
-╚══════════════════════════════════╝
-""")
+    +----------------------------------+
+    |      TFX AI Backend Running      |
+    |   Port: {settings.app_port}                   |
+    |   Env:  {settings.app_env}                    |
+    |   Docs: /docs                    |
+    +----------------------------------+
+    """)
     
     yield
     

@@ -82,7 +82,7 @@ async def seed_database(db: AsyncSession):
                     "CMS Integration",
                     "E-commerce Ready"
                 ],
-                "order": 1
+                "order_index": 1
             },
             {
                 "title": "AI Chatbot Development",
@@ -96,7 +96,7 @@ async def seed_database(db: AsyncSession):
                     "Analytics Dashboard",
                     "24/7 Support"
                 ],
-                "order": 2
+                "order_index": 2
             },
             {
                 "title": "SaaS Development",
@@ -110,7 +110,7 @@ async def seed_database(db: AsyncSession):
                     "API-first",
                     "Scalable Architecture"
                 ],
-                "order": 3
+                "order_index": 3
             },
             {
                 "title": "UI/UX Design",
@@ -124,7 +124,7 @@ async def seed_database(db: AsyncSession):
                     "Responsive",
                     "Handoff Ready"
                 ],
-                "order": 4
+                "order_index": 4
             },
             {
                 "title": "API Development",
@@ -138,7 +138,7 @@ async def seed_database(db: AsyncSession):
                     "Testing",
                     "Rate Limiting"
                 ],
-                "order": 5
+                "order_index": 5
             }
         ]
         
@@ -165,7 +165,7 @@ async def seed_database(db: AsyncSession):
                 "is_featured": True,
                 "is_published": True,
                 "project_url": "https://clinicmind.ai",
-                "order": 1
+                "order_index": 1
             },
             {
                 "title": "ZestEats",
@@ -177,7 +177,7 @@ async def seed_database(db: AsyncSession):
                 "is_featured": True,
                 "is_published": True,
                 "project_url": "https://zesteats.com",
-                "order": 2
+                "order_index": 2
             },
             {
                 "title": "AutoFlow",
@@ -189,7 +189,7 @@ async def seed_database(db: AsyncSession):
                 "is_featured": True,
                 "is_published": True,
                 "project_url": "https://autoflow.io",
-                "order": 3
+                "order_index": 3
             }
         ]
         
@@ -271,47 +271,44 @@ async def seed_database(db: AsyncSession):
         # === TESTIMONIALS ===
         testimonials_data = [
             {
-                "client_name": "Rahul Sharma",
-                "client_role": "CTO at StartupX",
+                "name": "Rahul Sharma",
+                "role": "CTO at StartupX",
                 "company": "StartupX",
                 "content": "TFX AI transformed our business with their AI chatbot solution. The implementation was seamless and the results exceeded our expectations. Customer satisfaction increased by 40%!",
                 "rating": 5,
                 "avatar": "rahul.jpg",
-                "is_featured": True,
                 "order": 1
             },
             {
-                "client_name": "Priya Mehta",
-                "client_role": "Founder at EduTech",
+                "name": "Priya Mehta",
+                "role": "Founder at EduTech",
                 "company": "EduTech",
                 "content": "Exceptional quality and delivery. The web application they built for us is robust, scalable, and our users love it. The team's technical expertise is unmatched.",
                 "rating": 5,
                 "avatar": "priya.jpg",
-                "is_featured": True,
                 "order": 2
             },
             {
-                "client_name": "Amit Patel",
-                "client_role": "CEO at RetailCo",
+                "name": "Amit Patel",
+                "role": "CEO at RetailCo",
                 "company": "RetailCo",
                 "content": "Great team, professional approach, and excellent communication throughout the project. They delivered our SaaS platform on time and within budget.",
                 "rating": 4,
                 "avatar": "amit.jpg",
-                "is_featured": True,
                 "order": 3
             }
         ]
         
         for testimonial_info in testimonials_data:
             result = await db.execute(
-                select(Testimonial).where(Testimonial.client_name == testimonial_info["client_name"])
+                select(Testimonial).where(Testimonial.name == testimonial_info["name"])
             )
             existing = result.scalar_one_or_none()
             
             if existing is None:
                 testimonial = Testimonial(**testimonial_info)
                 db.add(testimonial)
-                logger.info(f"Testimonial created: {testimonial_info['client_name']}")
+                logger.info(f"Testimonial created: {testimonial_info['name']}")
         
         # === BLOG POSTS ===
         blog_posts_data = [
@@ -332,11 +329,10 @@ At TFX AI, we've been at the forefront of this revolution, helping our clients l
 As we move further into 2025, we expect to see even more exciting developments in AI-powered web development, from natural language interfaces to autonomous web applications that can maintain and update themselves.""",
                 "category": "AI",
                 "tags": ["AI", "Web Dev", "2025"],
-                "featured_image": "ai-web-dev.jpg",
+                "thumbnail": "ai-web-dev.jpg",
                 "is_published": True,
-                "reading_time": 5,
-                "author_id": admin_id,
-                "order": 1
+                "read_time": 5,
+                "author_id": admin_id
             },
             {
                 "title": "Why Your Business Needs a Custom AI Chatbot",
@@ -355,11 +351,10 @@ At TFX AI, we've developed custom chatbots for businesses across various industr
 If you're still relying on traditional customer support methods, it's time to consider making the switch to AI-powered chatbots. The technology is mature, the benefits are proven, and your competitors are probably already using them.""",
                 "category": "AI Chatbot",
                 "tags": ["Chatbot", "AI", "Business"],
-                "featured_image": "ai-chatbot-business.jpg",
+                "thumbnail": "ai-chatbot-business.jpg",
                 "is_published": True,
-                "reading_time": 4,
-                "author_id": admin_id,
-                "order": 2
+                "read_time": 4,
+                "author_id": admin_id
             }
         ]
         
@@ -378,9 +373,9 @@ If you're still relying on traditional customer support methods, it's time to co
         case_study_data = {
             "title": "ClinicMind AI: Transforming Hospital Management",
             "slug": "clinicmind-ai-case-study",
-            "client": "City General Hospital",
-            "category": "AI",
-            "summary": "How we developed an AI-powered hospital management system that reduced administrative work by 60%.",
+            "client_name": "City General Hospital",
+            "industry": "Healthcare",
+            "thumbnail": "clinicmind-case.jpg",
             "problem": "City General Hospital was struggling with inefficient patient management systems. Manual scheduling, paper-based records, and lack of real-time data were causing significant delays and errors. The administrative staff was overwhelmed, and patient satisfaction was declining.",
             "solution": "We developed ClinicMind AI, a comprehensive hospital management system powered by artificial intelligence. The solution includes intelligent patient scheduling, AI-assisted diagnosis, automated billing, and real-time analytics. The system was built using Next.js for the frontend, FastAPI for the backend, PostgreSQL for the database, and OpenAI for AI capabilities.",
             "result": "The implementation of ClinicMind AI transformed the hospital's operations. Administrative workload was reduced by 60%, patient wait times decreased by 45%, and overall efficiency improved significantly. The staff could now focus more on patient care rather than paperwork.",
@@ -390,7 +385,6 @@ If you're still relying on traditional customer support methods, it's time to co
                 "uptime": "99.9%"
             },
             "tech_stack": ["Next.js", "FastAPI", "PostgreSQL", "OpenAI", "Docker"],
-            "featured_image": "clinicmind-case.jpg",
             "is_published": True,
             "order": 1
         }
@@ -406,20 +400,29 @@ If you're still relying on traditional customer support methods, it's time to co
             logger.info(f"Case study created: {case_study_data['title']}")
         
         # === SITE CONFIG ===
-        site_configs = [
-            {"site_name": "TFX AI", "site_tagline": "AI + Web Development Agency", "contact_email": "contact@tfxai.com", "whatsapp_number": "+1234567890", "address": "123 AI Street, Tech City, TC 12345", "social_linkedin": "https://linkedin.com/company/tfx-ai", "social_github": "https://github.com/tfx-ai", "social_twitter": "https://twitter.com/tfx_ai", "social_instagram": "https://instagram.com/tfx_ai", "analytics_enabled": True}
-        ]
+        site_configs = {
+            "site_name": "TFX AI",
+            "site_tagline": "AI + Web Development Agency",
+            "contact_email": "contact@tfxai.com",
+            "whatsapp_number": "+1234567890",
+            "address": "123 AI Street, Tech City, TC 12345",
+            "social_linkedin": "https://linkedin.com/company/tfx-ai",
+            "social_github": "https://github.com/tfx-ai",
+            "social_twitter": "https://twitter.com/tfx_ai",
+            "social_instagram": "https://instagram.com/tfx_ai",
+            "analytics_enabled": "True"
+        }
         
-        for config_data in site_configs:
+        for key, value in site_configs.items():
             result = await db.execute(
-                select(SiteConfig).where(SiteConfig.site_name == config_data["site_name"])
+                select(SiteConfig).where(SiteConfig.key == key)
             )
             existing = result.scalar_one_or_none()
             
             if existing is None:
-                config = SiteConfig(**config_data)
+                config = SiteConfig(key=key, value=str(value))
                 db.add(config)
-                logger.info(f"Site config created: {config_data['site_name']}")
+                logger.info(f"Site config created: {key}")
         
         await db.commit()
         logger.info("Database seeded successfully with full realistic data!")

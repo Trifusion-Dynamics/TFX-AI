@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Zap, Github, Linkedin, Twitter, MessageCircle } from 'lucide-react'
 import { GradientText } from '../common/GradientText'
 import { AnimatedButton } from '../common/AnimatedButton'
@@ -16,11 +17,17 @@ export function Footer() {
           
           {/* Brand Col */}
           <div className="flex flex-col gap-6">
-            <Link href="/" className="flex items-center gap-2 group w-fit">
-              <div className="p-2 bg-brand-base rounded-lg group-hover:bg-brand-purple transition-colors">
-                <Zap className="w-5 h-5 text-brand-yellow" />
+            <Link href="/" className="flex items-center group">
+              <div className="relative h-20 w-16 overflow-hidden">
+                <Image 
+                  src="/mainLogo.png" 
+                  alt="TFX AI Logo" 
+                  fill 
+                  className="object-contain group-hover:scale-105 transition-transform duration-300" 
+                  priority
+                />
               </div>
-              <span className="text-xl font-display font-bold tracking-tight">
+              <span className="text-xl font-display font-bold tracking-tight text-white">
                 TFX <GradientText>AI</GradientText>
               </span>
             </Link>

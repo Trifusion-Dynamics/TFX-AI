@@ -22,8 +22,10 @@ async def startup():
         logger.info("Database initialized successfully")
         
         # Create admin user
+        from app.db.base import AsyncSessionLocal
         from app.db.init_db import seed_database
-        await seed_database()
+        async with AsyncSessionLocal() as db:
+            await seed_database(db)
         logger.info("Database seeded successfully")
         
     except Exception as e:

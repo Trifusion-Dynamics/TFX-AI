@@ -6,7 +6,7 @@ async def check_database():
     
     try:
         conn = await asyncpg.connect(db_url)
-        print('✅ Connected to NeonDB!')
+        print('Connected to NeonDB!')
         
         # Check tables
         tables = await conn.fetch("""
@@ -16,27 +16,26 @@ async def check_database():
             ORDER BY table_name
         """)
         
-        print(f'📊 Found {len(tables)} tables:')
+        print(f'Found {len(tables)} tables:')
         for table in tables:
-            print(f'  ✅ {table["table_name"]}')
+            print(f'  Table: {table["table_name"]}')
         
-        # Check users
-        users = await conn.fetch('SELECT email, role, is_verified FROM users ORDER BY created_at')
-        print(f'\n👥 Users ({len(users)}):')
-        for user in users:
-            print(f'  ✅ {user["email"]} - {user["role"]} - Verified: {user["is_verified"]}')
-        
-        # Check services
-        services = await conn.fetch('SELECT title, slug FROM services ORDER BY order_index')
-        print(f'\n🛠️ Services ({len(services)}):')
-        for service in services:
-            print(f'  ✅ {service["title"]} - {service["slug"]}')
+        # Check pricing_plans columns
+        pricing_cols = await conn.fetch("""
+            SELECT column_name, data_type 
+            FROM information_schema.columns 
+            WHERE table_name = 'pricing_plans'
+            ORDER BY column_name
+        """)
+        print(f'\nPricing Plans Columns ({len(pricing_cols)}):')
+        for col in pricing_cols:
+            print(f'  Col: {col["column_name"]} ({col["data_type"]})')
         
         await conn.close()
-        print('\n🎉 Database is ready!')
+        print('Database verification complete!')
         
     except Exception as e:
-        print(f'❌ Error: {e}')
+        print(f'Error: {e}')
 
 if __name__ == "__main__":
     asyncio.run(check_database())

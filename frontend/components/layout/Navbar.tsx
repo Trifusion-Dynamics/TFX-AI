@@ -40,13 +40,13 @@ export function Navbar() {
       transition={{ duration: 0.5 }}
       className={cn(
         'fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b border-transparent',
-        isScrolled ? 'bg-dark-bg/80 backdrop-blur-md border-dark-border py-4 shadow-lg' : 'bg-transparent py-6'
+        isScrolled ? 'bg-dark-bg/80 backdrop-blur-md border-dark-border py-3 md:py-4 shadow-lg' : 'bg-transparent py-4 md:py-6'
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center group">
-          <div className="relative h-20 w-16 overflow-hidden">
+          <div className="relative h-12 w-10 overflow-hidden md:h-16 md:w-14 lg:h-20 lg:w-16">
             <Image 
               src="/mainLogo.png" 
               alt="TFX AI Logo" 
@@ -55,7 +55,7 @@ export function Navbar() {
               priority
             />
           </div>
-          <span className="text-xl font-display font-bold tracking-tight text-white">
+          <span className="text-lg font-display font-bold tracking-tight text-white md:text-xl lg:text-2xl">
             TFX <GradientText>AI</GradientText>
           </span>
         </Link>
@@ -112,10 +112,10 @@ export function Navbar() {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="lg:hidden p-2 text-gray-400 hover:text-white"
+          className="lg:hidden p-2 text-gray-400 hover:text-white md:p-1.5"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isMobileMenuOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
         </button>
       </div>
 
@@ -128,14 +128,14 @@ export function Navbar() {
             exit={{ height: 0, opacity: 0 }}
             className="lg:hidden overflow-hidden bg-dark-card border-b border-dark-border"
           >
-            <div className="container mx-auto px-4 py-4 flex flex-col gap-2">
+            <div className="container mx-auto px-4 py-3 md:py-4 flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={cn(
-                    'px-4 py-3 rounded-lg text-sm font-medium',
+                    'px-3 py-2.5 rounded-lg text-sm font-medium md:px-4 md:py-3',
                     pathname === link.href ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white'
                   )}
                 >
@@ -143,14 +143,14 @@ export function Navbar() {
                 </Link>
               ))}
               
-              <div className="h-px bg-dark-border my-2" />
+              <div className="h-px bg-dark-border my-1 md:my-2" />
               
               {isAuthenticated ? (
                 <>
                   <Link
                     href={user?.role === 'admin' ? '/admin' : '/dashboard'}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-400 hover:bg-white/5 hover:text-white rounded-lg"
+                    className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-gray-400 hover:bg-white/5 hover:text-white rounded-lg md:px-4 md:py-3"
                   >
                     <LayoutDashboard className="w-4 h-4" /> Dashboard
                   </Link>
@@ -159,17 +159,17 @@ export function Navbar() {
                       logout()
                       setIsMobileMenuOpen(false)
                     }}
-                    className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-brand-red hover:bg-brand-red/10 rounded-lg text-left"
+                    className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-brand-red hover:bg-brand-red/10 rounded-lg text-left md:px-4 md:py-3"
                   >
                     <LogOut className="w-4 h-4" /> Logout
                   </button>
                 </>
               ) : (
-                <div className="flex flex-col gap-2 mt-2">
+                <div className="flex flex-col gap-2 mt-1 md:mt-2">
                   <Link
                     href="/login"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="px-4 py-3 text-sm font-medium text-center text-gray-300 hover:text-white bg-white/5 rounded-lg"
+                    className="px-3 py-2.5 text-sm font-medium text-center text-gray-300 hover:text-white bg-white/5 rounded-lg md:px-4 md:py-3"
                   >
                     Login
                   </Link>

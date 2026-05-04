@@ -28,9 +28,46 @@ const MOCK_PROJECTS: Project[] = [
 ]
 
 const MOCK_TESTIMONIALS: Testimonial[] = [
-  { id: '1', name: 'John Doe', role: 'CEO', company: 'TechScale', content: 'TFX AI transformed our product with their AI expertise. The results were immediate and impressive.', rating: 5 },
-  { id: '2', name: 'Jane Smith', role: 'CTO', company: 'FutureMind', content: 'Their team is exceptional. They delivered a complex web app with perfect AI integration in record time.', rating: 5 },
-  { id: '3', name: 'Alex Rivera', role: 'Product Manager', company: 'Nexus', content: 'The best agency we have ever worked with. Clean code, great design, and intelligent solutions.', rating: 5 },
+  { 
+    id: '1', 
+    name: 'Rahul Sharma', 
+    role: 'CEO', 
+    company: 'TechScale Solutions', 
+    content: 'TFX AI transformed our business processes with their cutting-edge AI solutions. The automation they implemented saved us 40% in operational costs.', 
+    rating: 5 
+  },
+  { 
+    id: '2', 
+    name: 'Priya Patel', 
+    role: 'CTO', 
+    company: 'FutureMind Technologies', 
+    content: 'Exceptional team! They delivered our complex web application with perfect AI integration ahead of schedule. The quality exceeded our expectations.', 
+    rating: 5 
+  },
+  { 
+    id: '3', 
+    name: 'Amit Kumar', 
+    role: 'Product Manager', 
+    company: 'Nexus Digital', 
+    content: 'The best development agency we have ever worked with. Clean code, innovative solutions, and outstanding support throughout the project.', 
+    rating: 5 
+  },
+  { 
+    id: '4', 
+    name: 'Sneha Reddy', 
+    role: 'Marketing Director', 
+    company: 'GrowthHub', 
+    content: 'Their AI-powered marketing solution revolutionized our customer engagement. We saw a 300% increase in conversions within the first month.', 
+    rating: 5 
+  },
+  { 
+    id: '5', 
+    name: 'Vikram Singh', 
+    role: 'Founder', 
+    company: 'StartupVerse', 
+    content: 'From concept to deployment, TFX AI guided us through every step. Their expertise in both web development and AI is unmatched.', 
+    rating: 5 
+  },
 ]
 
 async function getHomeData() {

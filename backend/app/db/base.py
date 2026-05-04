@@ -71,7 +71,7 @@ async def init_db():
     try:
         async with engine.begin() as conn:
             # Import all models to ensure they are registered
-            from app.models import user, lead, service, project, blog, newsletter, testimonial, pricing, case_study, ai_tool_usage, site_config  # noqa
+            from app.models import user, lead, service, project, blog, newsletter, testimonial, pricing, case_study, ai_tool_usage, site_config, job  # noqa
             
             # Create all tables
             await conn.run_sync(Base.metadata.create_all)

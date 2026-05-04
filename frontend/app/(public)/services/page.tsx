@@ -41,6 +41,17 @@ const MOCK_SERVICES: Service[] = [
     order: 1 
   },
   { 
+    id: '9', 
+    title: 'AI Automation Solutions', 
+    slug: 'ai-automation', 
+    description: 'Revolutionize your business processes with intelligent AI automation. We design and implement comprehensive automation solutions that leverage artificial intelligence to streamline workflows, reduce manual tasks, and increase operational efficiency. From automated customer service chatbots to intelligent document processing and workflow automation, our AI solutions transform how businesses operate.', 
+    short_desc: 'Intelligent AI-powered automation solutions to streamline business processes.', 
+    icon: 'brain', 
+    features: ['Intelligent Process Automation', 'AI Chatbots & Virtual Assistants', 'Document Processing Automation', 'Workflow Optimization', 'Predictive Maintenance', 'Automated Decision Making', 'Smart Data Extraction', 'Integration with Existing Systems'], 
+    is_active: true, 
+    order: 9 
+  },
+  { 
     id: '2', 
     title: 'Custom Web Application Development', 
     slug: 'web-apps', 

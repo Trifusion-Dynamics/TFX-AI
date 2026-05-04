@@ -28,7 +28,7 @@ class Settings(BaseSettings):
     secret_key: str = Field(alias="SECRET_KEY", description="Application secret key")
     
     # Database Configuration
-    database_url: str = Field(alias="DATABASE_URL", description="NeonDB database URL")
+    database_url: Optional[str] = Field(alias="DATABASE_URL", default=None, description="NeonDB database URL")
     
     # JWT Configuration
     jwt_secret: str = Field(alias="JWT_SECRET", description="JWT secret key")
@@ -63,7 +63,6 @@ class Settings(BaseSettings):
         """
         required_fields = [
             "secret_key",
-            "database_url", 
             "jwt_secret"
         ]
         

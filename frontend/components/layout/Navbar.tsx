@@ -93,7 +93,7 @@ export function Navbar() {
         <div className="hidden lg:flex items-center gap-4">
           {isAuthenticated ? (
             <div className="flex items-center gap-4">
-              <Link href={user?.role === 'admin' ? '/admin' : '/dashboard'} className="text-gray-400 hover:text-white transition-colors">
+              <Link href={user?.role === 'ADMIN' ? '/admin' : '/dashboard'} className="text-gray-400 hover:text-white transition-colors">
                 <LayoutDashboard className="w-5 h-5" />
               </Link>
               <button onClick={logout} className="text-gray-400 hover:text-brand-red transition-colors">
@@ -147,7 +147,7 @@ export function Navbar() {
               {isAuthenticated ? (
                 <>
                   <Link
-                    href={user?.role === 'admin' ? '/admin' : '/dashboard'}
+                    href={user?.role === 'ADMIN' ? '/admin' : '/dashboard'}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-gray-400 hover:bg-white/5 hover:text-white rounded-lg md:px-4 md:py-3"
                   >

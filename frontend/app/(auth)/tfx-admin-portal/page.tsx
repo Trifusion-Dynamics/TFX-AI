@@ -20,6 +20,7 @@ export default function AdminLoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const login = useAuthStore((state) => state.login)
+  const logout = useAuthStore((state) => state.logout)
 
   const {
     register,
@@ -37,7 +38,7 @@ export default function AdminLoginPage() {
       login(user, access_token)
       toast.success('Welcome back!')
       
-      if (user.role === 'ADMIN' || user.role === 'admin') {
+      if (user.role === 'ADMIN') {
         router.push('/admin')
       } else {
         toast.error('Access denied. Admin only.')

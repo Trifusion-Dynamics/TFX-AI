@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import dynamic from 'next/dynamic'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { HeroSection } from '@/components/home/HeroSection'
@@ -13,6 +14,22 @@ import { serviceApi } from '@/lib/api/service.api'
 import { projectApi } from '@/lib/api/project.api'
 import { testimonialApi } from '@/lib/api/testimonial.api'
 import { Service, Project, Testimonial } from '@/types'
+
+// Dynamic imports for better code splitting
+const DynamicServicesOverview = dynamic(() => import('@/components/home/ServicesOverview').then(mod => ({ default: mod.ServicesOverview })), {
+  loading: () => <div className="h-96 flex items-center justify-center">Loading Services...</div>,
+  ssr: false
+})
+
+const DynamicFeaturedProjects = dynamic(() => import('@/components/home/FeaturedProjects').then(mod => ({ default: mod.FeaturedProjects })), {
+  loading: () => <div className="h-96 flex items-center justify-center">Loading Projects...</div>,
+  ssr: false
+})
+
+const DynamicTestimonials = dynamic(() => import('@/components/home/Testimonials').then(mod => ({ default: mod.Testimonials })), {
+  loading: () => <div className="h-96 flex items-center justify-center">Loading Testimonials...</div>,
+  ssr: false
+})
 
 // Mock data as fallback for "WOW" effect if backend is not ready
 const MOCK_SERVICES: Service[] = [
@@ -123,21 +140,15 @@ export default async function HomePage() {
       <main className="flex-1">
         <HeroSection />
         
-        <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading Services...</div>}>
-          <ServicesOverview services={services} />
-        </Suspense>
+        <DynamicServicesOverview services={services} />
 
         <WhyChooseUs />
 
-        <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading Projects...</div>}>
-          <FeaturedProjects projects={projects} />
-        </Suspense>
+        <DynamicFeaturedProjects projects={projects} />
 
         <AIToolsPreview />
 
-        <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading Testimonials...</div>}>
-          <Testimonials testimonials={testimonials} />
-        </Suspense>
+        <DynamicTestimonials testimonials={testimonials} />
 
         <CTASection />
       </main>

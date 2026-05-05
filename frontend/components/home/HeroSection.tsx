@@ -1,11 +1,13 @@
 'use client'
 
-import {  useEffect, useState } from 'react'
+import { useEffect, useState, lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
-import { AnimatedButton } from '../common/AnimatedButton'
 import { ChevronDown, Zap } from 'lucide-react'
 import { GradientText } from '../common/GradientText'
 import { cn } from '@/lib/utils/cn'
+
+// Lazy load non-critical components
+const AnimatedButton = lazy(() => import('../common/AnimatedButton').then(mod => ({ default: mod.AnimatedButton })))
 
 const TECH_BADGES = [
   { name: 'Next.js', color: 'bg-white/10' },
@@ -66,12 +68,24 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
         >
-          <AnimatedButton href="/contact" size="lg">
-            Start Your Project →
-          </AnimatedButton>
-          <AnimatedButton href="/portfolio" variant="outline" size="lg">
-            View Our Work
-          </AnimatedButton>
+          <Suspense fallback={
+            <div className="px-8 py-4 bg-gradient-brand text-white rounded-lg font-semibold">
+              Start Your Project →
+            </div>
+          }>
+            <AnimatedButton href="/contact" size="lg">
+              Start Your Project →
+            </AnimatedButton>
+          </Suspense>
+          <Suspense fallback={
+            <div className="px-8 py-4 border border-white/20 text-white rounded-lg font-semibold">
+              View Our Work
+            </div>
+          }>
+            <AnimatedButton href="/portfolio" variant="outline" size="lg">
+              View Our Work
+            </AnimatedButton>
+          </Suspense>
         </motion.div>
 
         {/* Stats Row */}
@@ -122,8 +136,28 @@ export function HeroSection() {
 
 function StatItem({ value, label, suffix }: { value: number; label: string; suffix?: string }) {
   const [count, setCount] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
+    // Use Intersection Observer for better performance
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    const element = document.getElementById(`stat-${label}`)
+    if (element) observer.observe(element)
+
+    return () => observer.disconnect()
+  }, [label, isVisible])
+
+  useEffect(() => {
+    if (!isVisible) return
+
     let start = 0
     const end = value
     const duration = 2000
@@ -136,10 +170,10 @@ function StatItem({ value, label, suffix }: { value: number; label: string; suff
     }, stepTime)
 
     return () => clearInterval(timer)
-  }, [value])
+  }, [value, isVisible])
 
   return (
-    <div className="flex flex-col items-center">
+    <div id={`stat-${label}`} className="flex flex-col items-center">
       <span className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
         {count}{suffix}
       </span>

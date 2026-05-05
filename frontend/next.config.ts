@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['framer-motion', 'lucide-react', '@radix-ui/react-icons'],
   },
+  // Turbopack configuration
+  turbopack: {},
   
   // Image optimization
   images: {

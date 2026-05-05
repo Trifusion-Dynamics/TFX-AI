@@ -94,6 +94,26 @@ async function getHomeData() {
 }
 
 
+export const metadata = {
+  title: 'TFX AI | AI-Powered Web Development & Digital Solutions',
+  description: 'Transform your business with TFX AI - Leading AI agency specializing in web development, automation, chatbots, and SaaS solutions. Build scalable, intelligent digital products.',
+  keywords: ['TFX AI', 'AI Agency', 'Web Development', 'AI Solutions', 'SaaS Development', 'Automation', 'Chatbots', 'Next.js Development', 'AI Integration'],
+  openGraph: {
+    title: 'TFX AI | AI-Powered Web Development & Digital Solutions',
+    description: 'Transform your business with cutting-edge AI solutions and elite web development. Build scalable, intelligent digital products.',
+    url: 'https://tfxai.com',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TFX AI | AI-Powered Web Development & Digital Solutions',
+    description: 'Transform your business with cutting-edge AI solutions and elite web development.',
+  },
+  alternates: {
+    canonical: '/',
+  },
+}
+
 export default async function HomePage() {
   const { services, projects, testimonials } = await getHomeData()
 

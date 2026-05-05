@@ -13,6 +13,27 @@ import Link from 'next/link'
 import { Github, ExternalLink, ArrowRight, Search, LayoutGrid, Brain, Globe, Code } from 'lucide-react'
 import { AnimatedButton } from '@/components/common/AnimatedButton'
 import { cn } from '@/lib/utils/cn'
+import { ProjectCardSkeleton } from '@/components/common/SkeletonLoader'
+
+export const metadata = {
+  title: 'Portfolio | TFX AI - AI Projects, Web Apps & SaaS Solutions',
+  description: 'Explore TFX AI\'s portfolio of 50+ successful projects including AI applications, web development, and SaaS platforms. See our expertise in action.',
+  keywords: ['TFX AI Portfolio', 'AI Projects', 'Web Development Portfolio', 'SaaS Projects', 'AI Applications', 'Next.js Projects', 'Machine Learning Projects'],
+  openGraph: {
+    title: 'Portfolio | TFX AI - AI Projects, Web Apps & SaaS Solutions',
+    description: 'Explore our portfolio of 50+ successful AI, web, and SaaS projects. See our expertise in cutting-edge technology solutions.',
+    url: 'https://tfxai.com/portfolio',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Portfolio | TFX AI - AI Projects, Web Apps & SaaS Solutions',
+    description: 'Explore our portfolio of 50+ successful AI, web, and SaaS projects.',
+  },
+  alternates: {
+    canonical: '/portfolio',
+  },
+}
 
 const CATEGORIES = [
   { id: 'ALL', label: 'All', icon: <LayoutGrid className="w-4 h-4" /> },
@@ -107,85 +128,93 @@ export default function PortfolioPage() {
 
         {/* Projects Grid */}
         <section className="container mx-auto px-4 min-h-[600px] mb-24">
-          <motion.div 
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project) => (
-                <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <GlassCard hover className="h-full flex flex-col p-0 overflow-hidden border-dark-border group">
-                    {/* Thumbnail */}
-                    <div className="relative aspect-[16/9] overflow-hidden">
-                      <Image
-                        src={project.thumbnail || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80'}
-                        alt={project.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className={cn(
-                        "absolute top-4 right-4 px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded border z-10",
-                        CATEGORY_COLORS[project.category.toUpperCase()] || "bg-gray-500/20 text-gray-400 border-gray-500/30"
-                      )}>
-                        {project.category}
-                      </div>
-                    </div>
-
-                    {/* Body */}
-                    <div className="p-6 flex flex-col flex-grow">
-                      <h3 className="text-xl font-display font-bold text-white mb-3 line-clamp-1 group-hover:text-brand-pink transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-gray-400 text-sm line-clamp-3 mb-6 flex-grow">
-                        {project.short_desc}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {project.tech_stack.slice(0, 3).map((tech) => (
-                          <span key={tech} className="text-[10px] px-2 py-1 bg-white/5 text-gray-400 rounded-full border border-white/5">
-                            {tech}
-                          </span>
-                        ))}
-                        {project.tech_stack.length > 3 && (
-                          <span className="text-[10px] px-2 py-1 bg-white/5 text-gray-400 rounded-full border border-white/5">
-                            +{project.tech_stack.length - 3}
-                          </span>
-                        )}
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(6)].map((_, i) => (
+                <ProjectCardSkeleton key={i} />
+              ))}
+            </div>
+          ) : (
+            <motion.div 
+              layout
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              <AnimatePresence mode="popLayout">
+                {filteredProjects.map((project) => (
+                  <motion.div
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <GlassCard hover className="h-full flex flex-col p-0 overflow-hidden border-dark-border group">
+                      {/* Thumbnail */}
+                      <div className="relative aspect-[16/9] overflow-hidden">
+                        <Image
+                          src={project.thumbnail || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80'}
+                          alt={project.title}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className={cn(
+                          "absolute top-4 right-4 px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded border z-10",
+                          CATEGORY_COLORS[project.category.toUpperCase()] || "bg-gray-500/20 text-gray-400 border-gray-500/30"
+                        )}>
+                          {project.category}
+                        </div>
                       </div>
 
-                      <div className="flex items-center justify-between mt-auto">
-                        <div className="flex items-center gap-3">
-                          {project.github_url && (
-                            <a href={project.github_url} target="_blank" rel="noreferrer" className="p-2 bg-white/5 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all">
-                              <Github className="w-4 h-4" />
-                            </a>
-                          )}
-                          {project.live_url && (
-                            <a href={project.live_url} target="_blank" rel="noreferrer" className="p-2 bg-white/5 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all">
-                              <ExternalLink className="w-4 h-4" />
-                            </a>
+                      {/* Body */}
+                      <div className="p-6 flex flex-col flex-grow">
+                        <h3 className="text-xl font-display font-bold text-white mb-3 line-clamp-1 group-hover:text-brand-pink transition-colors">
+                          {project.title}
+                        </h3>
+                        <p className="text-gray-400 text-sm line-clamp-3 mb-6 flex-grow">
+                          {project.short_desc}
+                        </p>
+
+                        <div className="flex flex-wrap gap-2 mb-6">
+                          {project.tech_stack.slice(0, 3).map((tech) => (
+                            <span key={tech} className="text-[10px] px-2 py-1 bg-white/5 text-gray-400 rounded-full border border-white/5">
+                              {tech}
+                            </span>
+                          ))}
+                          {project.tech_stack.length > 3 && (
+                            <span className="text-[10px] px-2 py-1 bg-white/5 text-gray-400 rounded-full border border-white/5">
+                              +{project.tech_stack.length - 3}
+                            </span>
                           )}
                         </div>
-                        <Link 
-                          href={`/portfolio/${project.slug}`}
-                          className="text-sm font-semibold text-brand-pink flex items-center gap-1 group/link"
-                        >
-                          Details <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                        </Link>
+
+                        <div className="flex items-center justify-between mt-auto">
+                          <div className="flex items-center gap-3">
+                            {project.github_url && (
+                              <a href={project.github_url} target="_blank" rel="noreferrer" className="p-2 bg-white/5 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                                <Github className="w-4 h-4" />
+                              </a>
+                            )}
+                            {project.live_url && (
+                              <a href={project.live_url} target="_blank" rel="noreferrer" className="p-2 bg-white/5 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                                <ExternalLink className="w-4 h-4" />
+                              </a>
+                            )}
+                          </div>
+                          <Link 
+                            href={`/portfolio/${project.slug}`}
+                            className="text-sm font-semibold text-brand-pink flex items-center gap-1 group/link"
+                          >
+                            Details <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                          </Link>
+                        </div>
                       </div>
-                    </div>
-                  </GlassCard>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+                    </GlassCard>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+          )}
 
           {/* Pagination */}
           <div className="flex items-center justify-center gap-4 mt-16">

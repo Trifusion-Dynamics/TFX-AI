@@ -39,6 +39,17 @@ export const metadata: Metadata = {
     description: 'Empowering businesses with cutting-edge AI and elite web engineering.',
     creator: '@tfxai',
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 

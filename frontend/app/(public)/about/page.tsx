@@ -8,8 +8,23 @@ import { Github, Linkedin, Target, Eye, Code2, BrainCircuit, Globe2, Database, L
 import Image from 'next/image'
 
 export const metadata = {
-  title: 'About | TFX AI',
-  description: 'Learn more about TFX AI, our mission, our tech stack, and the team behind the intelligence.',
+  title: 'About TFX AI | Pioneering AI-Powered Digital Solutions',
+  description: 'Discover TFX AI - your trusted partner for AI-powered web development, automation solutions, and digital transformation. Learn about our mission, expertise, and the team behind innovative AI solutions.',
+  keywords: ['About TFX AI', 'AI Agency', 'Web Development', 'AI Solutions', 'Digital Transformation', 'Arun Kumar Bind', 'TFX AI Team', 'AI Automation'],
+  openGraph: {
+    title: 'About TFX AI | Pioneering AI-Powered Digital Solutions',
+    description: 'Meet the team behind TFX AI and discover our mission to democratize AI technology for businesses worldwide.',
+    url: 'https://tfxai.com/about',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About TFX AI | Pioneering AI-Powered Digital Solutions',
+    description: 'Meet the team behind TFX AI and discover our mission to democratize AI technology.',
+  },
+  alternates: {
+    canonical: '/about',
+  },
 }
 
 export default function AboutPage() {

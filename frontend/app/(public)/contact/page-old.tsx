@@ -10,7 +10,7 @@ export const metadata = {
   openGraph: {
     title: 'Contact TFX AI | Get Started with AI-Powered Solutions',
     description: 'Reach out to TFX AI for expert AI development and web solutions. Get a free consultation and turn your ideas into reality.',
-    url: 'https://tfxai.vercel.app/contact',
+    url: 'https://tfxai.com/contact',
     type: 'website',
   },
   twitter: {

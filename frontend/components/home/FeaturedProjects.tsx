@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { SectionHeading } from '../common/SectionHeading'
 import { Project } from '@/types'
-import Image from 'next/image'
+import { OptimizedImage } from '../common/OptimizedImage'
 import Link from 'next/link'
 import { Github, ExternalLink, ArrowRight } from 'lucide-react'
 import { AnimatedButton } from '../common/AnimatedButton'
@@ -46,11 +46,12 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
             >
               {/* Thumbnail */}
               <div className="relative aspect-[16/9] overflow-hidden">
-                <Image
+                <OptimizedImage
                   src={project.thumbnail || '/placeholder-project.png'}
                   alt={project.title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  lazy={true}
                 />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
                   <Link 

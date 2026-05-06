@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-05-06T08:17:48.915Z",
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "Basic Calculator",
+      "file": "test-calculator.js",
+      "status": "✅ PASSED",
+      "exitCode": 0,
+      "error": ""
+    },
+    {
+      "name": "Enhanced Features",
+      "file": "test-enhanced-calculator.js",
+      "status": "✅ PASSED",
+      "exitCode": 0,
+      "error": ""
+    },
+    {
+      "name": "Loading Fix",
+      "file": "test-loading-fix.js",
+      "status": "✅ PASSED",
+      "exitCode": 0,
+      "error": ""
+    }
+  ]
+}

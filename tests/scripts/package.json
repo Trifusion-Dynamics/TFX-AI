@@ -1,0 +1,30 @@
+{
+  "name": "tfx-ai-calculator-tests",
+  "version": "2.0.0",
+  "description": "Categorized test suite for TFX AI Project Cost Calculator",
+  "main": "run-categorized-tests.js",
+  "scripts": {
+    "test": "node run-categorized-tests.js",
+    "test:unit": "node ../unit-tests/test-calculator.js",
+    "test:integration": "node ../integration-tests/test-enhanced-calculator.js",
+    "test:e2e": "node ../e2e-tests/test-loading-fix.js",
+    "test:all": "npm run test:unit && npm run test:integration && npm run test:e2e",
+    "test:legacy": "node run-all-tests.js",
+    "report": "node run-categorized-tests.js > ../reports/test-results.txt 2>&1"
+  },
+  "keywords": [
+    "tfx-ai",
+    "calculator",
+    "pricing",
+    "test",
+    "automation",
+    "unit-tests",
+    "integration-tests",
+    "e2e-tests"
+  ],
+  "author": "TFX AI Development Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

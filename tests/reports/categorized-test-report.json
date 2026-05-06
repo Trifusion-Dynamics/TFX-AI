@@ -1,0 +1,56 @@
+{
+  "timestamp": "2026-05-06T08:19:40.938Z",
+  "categories": [
+    {
+      "name": "Unit Tests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "status": "✅ PASSED",
+      "tests": [
+        {
+          "name": "test-calculator.js",
+          "status": "✅ PASSED",
+          "exitCode": 0,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "name": "Integration Tests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "status": "✅ PASSED",
+      "tests": [
+        {
+          "name": "test-enhanced-calculator.js",
+          "status": "✅ PASSED",
+          "exitCode": 0,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "name": "E2E Tests",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "status": "✅ PASSED",
+      "tests": [
+        {
+          "name": "test-loading-fix.js",
+          "status": "✅ PASSED",
+          "exitCode": 0,
+          "error": ""
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "passRate": "100.0"
+  }
+}

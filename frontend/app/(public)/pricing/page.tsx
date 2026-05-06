@@ -3,9 +3,10 @@ import { Footer } from '@/components/layout/Footer'
 import { SectionHeading } from '@/components/common/SectionHeading'
 import { GlassCard } from '@/components/common/GlassCard'
 import { AnimatedButton } from '@/components/common/AnimatedButton'
+import QuickCalculator from '@/components/common/QuickCalculator'
 import { pricingApi } from '@/lib/api/pricing.api'
 import { PricingPlan } from '@/types'
-import { Check, HelpCircle, MessageCircle } from 'lucide-react'
+import { Check, HelpCircle, MessageCircle, Calculator, ArrowRight } from 'lucide-react'
 
 export const metadata = {
   title: 'Pricing | TFX AI',
@@ -46,13 +47,74 @@ export default async function PricingPage() {
           />
         </section>
 
-        {/* Pricing Cards */}
+        {/* Calculator CTA Banner */}
+        <section className="container mx-auto px-4 mb-16">
+          <GlassCard className="p-8 bg-gradient-brand/10 border-brand-pink/30">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="text-center md:text-left">
+                <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
+                  <Calculator className="w-8 h-8 text-brand-pink" />
+                  <h3 className="text-2xl font-display font-bold text-white">
+                    Not sure which plan fits? 🤔
+                  </h3>
+                </div>
+                <p className="text-gray-300 text-lg">
+                  Use our interactive calculator to get an instant estimate
+                </p>
+              </div>
+              <AnimatedButton 
+                href="/pricing/calculator" 
+                variant="primary"
+                className="bg-gradient-brand text-white px-8 py-4 text-lg font-medium shadow-lg shadow-brand-pink/20"
+              >
+                Calculate My Project Cost
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </AnimatedButton>
+            </div>
+          </GlassCard>
+        </section>
+
+        {/* Pricing Section with Calculator */}
         <section className="container mx-auto px-4 mb-32">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {plans.map((plan) => (
-              <PricingCard key={plan.id} plan={plan} />
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Pricing Cards */}
+            <div className="lg:col-span-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {plans.map((plan) => (
+                  <PricingCard key={plan.id} plan={plan} />
+                ))}
+              </div>
+            </div>
+            
+            {/* Quick Calculator Sidebar */}
+            <div className="lg:col-span-1">
+              <QuickCalculator />
+            </div>
           </div>
+        </section>
+
+        {/* Custom Project CTA */}
+        <section className="container mx-auto px-4 mb-16">
+          <GlassCard className="p-6 bg-gray-800/50 border-gray-600">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="text-center md:text-left">
+                <h4 className="text-xl font-display font-bold text-white mb-2">
+                  Custom project? Get exact quote →
+                </h4>
+                <p className="text-gray-400">
+                  Every project is unique. Let us provide a tailored estimate for your specific needs.
+                </p>
+              </div>
+              <AnimatedButton 
+                href="/pricing/calculator" 
+                variant="outline"
+                className="border-brand-pink text-brand-pink hover:bg-brand-pink hover:text-white"
+              >
+                Get Custom Quote
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </AnimatedButton>
+            </div>
+          </GlassCard>
         </section>
 
         {/* FAQ Section */}

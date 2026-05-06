@@ -13,17 +13,54 @@ export default function LeadsPage() {
   const [leads, setLeads] = useState<any[]>([])
 
   useEffect(() => {
-    // Mock data fetching
-    setTimeout(() => {
-      setLeads([
-        { id: '1', name: 'Arun Kumar', email: 'arun@example.com', subject: 'AI Project', status: 'NEW', date: '2024-05-03' },
-        { id: '2', name: 'John Smith', email: 'john@tech.com', subject: 'SaaS Dev', status: 'IN_PROGRESS', date: '2024-05-02' },
-        { id: '3', name: 'Priya Raj', email: 'priya@web.in', subject: 'UI UX', status: 'RESOLVED', date: '2024-05-01' },
-        { id: '4', name: 'Mike Ross', email: 'mike@legals.com', subject: 'API Dev', status: 'CLOSED', date: '2024-04-30' },
-      ])
-      setLoading(false)
-    }, 800)
+    fetchLeads()
   }, [])
+
+  const fetchLeads = async () => {
+    try {
+      setLoading(true)
+      // In a real app, you would fetch from your backend API
+      // For now, we'll simulate with the test data we created
+      const mockLeads = [
+        { 
+          id: '1', 
+          name: 'Test User', 
+          email: 'test@example.com', 
+          subject: 'Calculator Lead - Website',
+          message: 'Project Type: website, Features: {\"pages\":\"4-8\",\"cms\":true,\"blog\":false,\"contactForms\":true,\"animations\":false}, Timeline: normal, Budget Range: ₹35,000 - ₹52,000, Source: calculator',
+          status: 'NEW', 
+          date: new Date().toISOString().split('T')[0],
+          source: 'calculator'
+        },
+        { 
+          id: '2', 
+          name: 'Arun Kumar', 
+          email: 'arun@example.com', 
+          subject: 'AI Project', 
+          message: 'Interested in AI chatbot development',
+          status: 'IN_PROGRESS', 
+          date: '2024-05-03',
+          source: 'contact'
+        },
+        { 
+          id: '3', 
+          name: 'John Smith', 
+          email: 'john@tech.com', 
+          subject: 'SaaS Dev', 
+          message: 'Need SaaS platform development',
+          status: 'RESOLVED', 
+          date: '2024-05-02',
+          source: 'contact'
+        },
+      ]
+      setLeads(mockLeads)
+    } catch (error) {
+      console.error('Failed to fetch leads:', error)
+      toast.error('Failed to load leads')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleDelete = (id: string) => {
     if (confirm('Are you sure you want to delete this lead?')) {
@@ -44,6 +81,18 @@ export default function LeadsPage() {
       )
     },
     { key: 'subject', label: 'Subject' },
+    { 
+      key: 'source', 
+      label: 'Source',
+      render: (val: any) => (
+        <span className={cn(
+          "px-2 py-1 rounded text-[10px] font-bold",
+          val === 'calculator' ? 'bg-brand-pink/10 text-brand-pink' : 'bg-white/5 text-gray-400'
+        )}>
+          {val === 'calculator' ? '🧮 Calculator' : '📧 Contact'}
+        </span>
+      )
+    },
     { 
       key: 'status', 
       label: 'Status',

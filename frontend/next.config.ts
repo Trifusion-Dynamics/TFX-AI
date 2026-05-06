@@ -55,6 +55,9 @@ const nextConfig: NextConfig = {
     
     return config
   },
+
+  // Turbopack configuration (empty to silence the error)
+  turbopack: {},
   
   // Static optimization
   trailingSlash: false,

@@ -17,18 +17,15 @@ import { Service, Project, Testimonial } from '@/types'
 
 // Dynamic imports for better code splitting
 const DynamicServicesOverview = dynamic(() => import('@/components/home/ServicesOverview').then(mod => ({ default: mod.ServicesOverview })), {
-  loading: () => <div className="h-96 flex items-center justify-center">Loading Services...</div>,
-  ssr: false
+  loading: () => <div className="h-96 flex items-center justify-center">Loading Services...</div>
 })
 
 const DynamicFeaturedProjects = dynamic(() => import('@/components/home/FeaturedProjects').then(mod => ({ default: mod.FeaturedProjects })), {
-  loading: () => <div className="h-96 flex items-center justify-center">Loading Projects...</div>,
-  ssr: false
+  loading: () => <div className="h-96 flex items-center justify-center">Loading Projects...</div>
 })
 
 const DynamicTestimonials = dynamic(() => import('@/components/home/Testimonials').then(mod => ({ default: mod.Testimonials })), {
-  loading: () => <div className="h-96 flex items-center justify-center">Loading Testimonials...</div>,
-  ssr: false
+  loading: () => <div className="h-96 flex items-center justify-center">Loading Testimonials...</div>
 })
 
 // Mock data as fallback for "WOW" effect if backend is not ready

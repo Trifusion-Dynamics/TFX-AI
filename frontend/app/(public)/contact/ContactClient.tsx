@@ -8,6 +8,7 @@ import { SectionHeading } from '@/components/common/SectionHeading'
 import { GlassCard } from '@/components/common/GlassCard'
 import { AnimatedButton } from '@/components/common/AnimatedButton'
 import { WhatsAppButton } from '@/components/common/WhatsAppButton'
+import { CalendlyButton } from '@/components/common/CalendlyButton'
 import { contactSchema, ContactFormData } from '@/lib/validations/contact.schema'
 import { contactApi } from '@/lib/api/contact.api'
 import { Mail, Phone, MapPin, Clock, Github, Linkedin, Twitter, CheckCircle, Send, Loader2 } from 'lucide-react'
@@ -44,6 +45,32 @@ export default function ContactClient() {
   return (
     <main className="flex-1 pt-32 pb-24">
       <div className="container mx-auto px-4">
+        {/* Calendly Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-8"
+        >
+          <GlassCard className="p-4 border-brand-pink/20 bg-gradient-brand/5">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-brand-pink/20 flex items-center justify-center">
+                  <span className="text-lg">📅</span>
+                </div>
+                <div>
+                  <p className="text-white font-medium">Prefer to talk?</p>
+                  <p className="text-gray-400 text-sm">Book a free 30-min consultation call instead</p>
+                </div>
+              </div>
+              <CalendlyButton 
+                text="Book Free Call →" 
+                variant="outline" 
+                size="sm"
+              />
+            </div>
+          </GlassCard>
+        </motion.div>
+
         <div className="flex flex-col lg:flex-row gap-16">
           
           {/* Left: Contact Info */}

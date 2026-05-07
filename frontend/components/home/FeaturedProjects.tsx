@@ -22,7 +22,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 
 export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   return (
-    <section className="py-24 px-4 bg-dark-bg/50">
+    <section className="py-24 px-4 bg-dark-bg">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-end justify-between gap-8 mb-16">
           <SectionHeading
@@ -42,69 +42,74 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="group flex flex-col bg-dark-card rounded-2xl border border-dark-border overflow-hidden hover:border-brand-pink/30 transition-all duration-300"
+              className="group relative p-[1px] rounded-2xl overflow-hidden"
             >
-              {/* Thumbnail */}
-              <div className="relative aspect-[16/9] overflow-hidden">
-                <OptimizedImage
-                  src={project.thumbnail || '/placeholder-project.png'}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  lazy={true}
-                />
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                  <Link 
-                    href={`/portfolio/${project.slug}`}
-                    className="px-6 py-2 bg-white text-black font-semibold rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform"
-                  >
-                    View Details
-                  </Link>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-6 flex flex-col flex-grow">
-                <div className="flex items-center justify-between mb-4">
-                  <span className={cn(
-                    "px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded border",
-                    CATEGORY_COLORS[project.category.toUpperCase()] || CATEGORY_COLORS.default
-                  )}>
-                    {project.category}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    {project.github_url && (
-                      <a href={project.github_url} target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors">
-                        <Github className="w-4 h-4" />
-                      </a>
-                    )}
-                    {project.live_url && (
-                      <a href={project.live_url} target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors">
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    )}
+              {/* Animated Gradient Border */}
+              <div className="absolute inset-0 bg-gradient-brand opacity-20 group-hover:opacity-100 transition-opacity animate-pulse" />
+              
+              <div className="relative bg-dark-card rounded-2xl border border-dark-border overflow-hidden hover:border-brand-pink/30 transition-all duration-300">
+                {/* Thumbnail */}
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <OptimizedImage
+                    src={project.thumbnail || 'https://picsum.photos/seed/project/800/600.jpg'}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    lazy={true}
+                  />
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                    <Link 
+                      href={`/portfolio/${project.slug}`}
+                      className="px-6 py-2 bg-white text-black font-semibold rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform"
+                    >
+                      View Details
+                    </Link>
                   </div>
                 </div>
 
-                <h3 className="text-xl font-display font-bold text-white mb-3 group-hover:text-brand-pink transition-colors">
-                  {project.title}
-                </h3>
-                
-                <p className="text-gray-400 text-sm line-clamp-2 mb-6">
-                  {project.short_desc}
-                </p>
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className={cn(
+                      "px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded border",
+                      CATEGORY_COLORS[project.category.toUpperCase()] || CATEGORY_COLORS.default
+                    )}>
+                      {project.category}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      {project.github_url && (
+                        <a href={project.github_url} target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors">
+                          <Github className="w-4 h-4" />
+                        </a>
+                      )}
+                      {project.live_url && (
+                        <a href={project.live_url} target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors">
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
 
-                <div className="mt-auto flex flex-wrap gap-2">
-                  {project.tech_stack.slice(0, 4).map((tech) => (
-                    <span key={tech} className="text-[10px] px-2 py-1 bg-white/5 text-gray-400 rounded-full border border-white/5">
-                      {tech}
-                    </span>
-                  ))}
-                  {project.tech_stack.length > 4 && (
-                    <span className="text-[10px] px-2 py-1 bg-white/5 text-gray-400 rounded-full border border-white/5">
-                      +{project.tech_stack.length - 4}
-                    </span>
-                  )}
+                  <h3 className="text-xl font-display font-bold text-white mb-3 group-hover:text-brand-pink transition-colors">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-gray-400 text-sm line-clamp-2 mb-6">
+                    {project.short_desc}
+                  </p>
+
+                  <div className="mt-auto flex flex-wrap gap-2">
+                    {project.tech_stack.slice(0, 4).map((tech) => (
+                      <span key={tech} className="text-[10px] px-2 py-1 bg-white/5 text-gray-400 rounded-full border border-white/5">
+                        {tech}
+                      </span>
+                    ))}
+                    {project.tech_stack.length > 4 && (
+                      <span className="text-[10px] px-2 py-1 bg-white/5 text-gray-400 rounded-full border border-white/5">
+                        +{project.tech_stack.length - 4}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>

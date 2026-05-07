@@ -134,6 +134,37 @@ export interface LoginResponse {
   access_token: string
 }
 
+// Chatbot types
+export interface ChatMessage {
+  id: string
+  role: 'user' | 'assistant' | 'system'
+  content: string
+  timestamp: Date
+  suggestedActions?: string[]
+  isLeadCapture?: boolean
+}
+
+export interface ChatbotResponse {
+  reply: string
+  intent: string
+  suggested_actions: string[]
+  should_capture_lead: boolean
+  lead_capture_prompt?: string
+}
+
+export interface VisitorInfo {
+  name: string
+  email: string
+  capturedAt: Date
+}
+
+export interface ChatRequest {
+  message: string
+  conversation_history?: Array<{ role: string; content: string }>
+  visitor_name?: string
+  page_context?: string
+}
+
 // Calendly TypeScript declarations
 declare global {
   interface Window {

@@ -3,8 +3,14 @@
 import { ThemeProvider } from 'next-themes'
 import { Toaster } from 'react-hot-toast'
 import { ReactNode } from 'react'
+import dynamic from 'next/dynamic'
 
 import { AnimationProvider } from '@/components/providers/AnimationProvider'
+
+// Dynamically import ChatWidget to avoid SSR issues
+const ChatWidget = dynamic(() => import('@/components/chatbot/ChatWidget'), {
+  ssr: false
+})
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
@@ -23,6 +29,8 @@ export function Providers({ children }: { children: ReactNode }) {
           },
         }}
       />
+      
+      <ChatWidget />
     </ThemeProvider>
   )
 }

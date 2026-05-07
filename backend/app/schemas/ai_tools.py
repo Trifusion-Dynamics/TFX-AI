@@ -56,6 +56,27 @@ class QABotRequest(BaseModel):
     context: Optional[str] = Field(None, max_length=2000)
 
 
+class ChatbotRequest(BaseModel):
+    """Chatbot request."""
+    model_config = ConfigDict(from_attributes=True)
+    
+    message: str = Field(..., min_length=1, max_length=500)
+    conversation_history: Optional[list[dict]] = Field(default_factory=list)
+    visitor_name: Optional[str] = Field(None, max_length=100)
+    page_context: Optional[str] = Field(None, max_length=100)
+
+
+class ChatbotResponse(BaseModel):
+    """Chatbot response."""
+    model_config = ConfigDict(from_attributes=True)
+    
+    reply: str
+    intent: str
+    suggested_actions: list[str]
+    should_capture_lead: bool
+    lead_capture_prompt: Optional[str] = None
+
+
 class AIToolResponse(BaseModel):
     """AI tool response schema."""
     model_config = ConfigDict(from_attributes=True)

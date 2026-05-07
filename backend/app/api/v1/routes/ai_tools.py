@@ -15,6 +15,7 @@ from app.schemas.ai_tools import (
     ResumeAnalyzerRequest, 
     TextGeneratorRequest, 
     QABotRequest,
+    ChatbotRequest,
     TextType,
     TextTone,
     TextLength
@@ -152,5 +153,37 @@ async def get_usage_history(
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/chatbot", response_model=ApiResponse)
+async def chatbot(
+    request: Request,
+    chat_data: ChatbotRequest,
+    db: AsyncSession = Depends(get_db),
+    current_user: Optional[User] = Depends(optional_user)
+):
+    """AI chatbot for website visitors."""
+    try:
+        service = get_ai_tools_service(db)
+        client_ip = get_client_ip(request)
+        user_id = str(current_user.id) if current_user else None
+        
+        result = await service.chatbot(
+            message=chat_data.message,
+            conversation_history=chat_data.conversation_history,
+            visitor_name=chat_data.visitor_name,
+            page_context=chat_data.page_context,
+            user_id=user_id,
+            ip_address=client_ip
+        )
+        
+        return ApiResponse(
+            success=True,
+            message="Chatbot response generated successfully",
+            data=result
+        )
+        
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=str(e))
 
 

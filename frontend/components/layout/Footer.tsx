@@ -1,14 +1,15 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Zap, Github, Linkedin, Twitter, MessageCircle } from 'lucide-react'
+import { Zap, Github, Linkedin, Twitter, MessageCircle, Mail, Phone, MapPin, Briefcase, Code, Brain, Smartphone, Palette } from 'lucide-react'
 import { GradientText } from '../common/GradientText'
 import { AnimatedButton } from '../common/AnimatedButton'
+import { CalendlyButton } from '../common/CalendlyButton'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative bg-dark-card border-t border-dark-border pt-16 pb-8 overflow-hidden">
+    <footer className="relative bg-dark-card border-t border-dark-border pt-16 pb-8">
       {/* Top Gradient Border */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-brand opacity-50" />
       
@@ -34,6 +35,20 @@ export function Footer() {
             <p className="text-gray-400 text-sm leading-relaxed">
               Transforming businesses with cutting-edge AI solutions and modern web development. We build the future, today.
             </p>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-gray-400">
+                <Mail className="w-4 h-4 text-brand-pink" />
+                <span className="text-sm">hello@tfxai.com</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-400">
+                <Phone className="w-4 h-4 text-brand-pink" />
+                <span className="text-sm">+91 98765 43210</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-400">
+                <MapPin className="w-4 h-4 text-brand-pink" />
+                <span className="text-sm">Delhi, India</span>
+              </div>
+            </div>
             <div className="flex items-center gap-4">
               <a href="https://github.com" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all">
                 <Github className="w-4 h-4" />
@@ -50,30 +65,34 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Links Col 1 */}
-          <div>
-            <h3 className="font-display font-semibold text-white mb-6">Company</h3>
-            <ul className="flex flex-col gap-3">
-              <li><Link href="/about" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">About Us</Link></li>
-              <li><Link href="/portfolio" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Our Work</Link></li>
-              <li><Link href="/pricing" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Pricing</Link></li>
-              <li><Link href="/contact" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Contact</Link></li>
-              <li><Link href="/career" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Careers</Link></li>
-            </ul>
-          </div>
-
-          {/* Links Col 2 */}
+          {/* Services */}
           <div>
             <h3 className="font-display font-semibold text-white mb-6">Services</h3>
             <ul className="flex flex-col gap-3">
               <li><Link href="/services/ai-development" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">AI Development</Link></li>
               <li><Link href="/services/web-apps" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Web Applications</Link></li>
               <li><Link href="/services/mobile-apps" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Mobile Apps</Link></li>
-              <li><Link href="/services/ui-ux" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">UI/UX Design</Link></li>
+              <li><Link href="/services/saas-development" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">SaaS Development</Link></li>
+              <li><Link href="/services/ui-ux-branding" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">UI/UX Design</Link></li>
             </ul>
           </div>
 
-          {/* Newsletter Col */}
+          {/* Company */}
+          <div>
+            <h3 className="font-display font-semibold text-white mb-6">Company</h3>
+            <ul className="flex flex-col gap-3">
+              <li><Link href="/about" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">About Us</Link></li>
+              <li><Link href="/portfolio" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Portfolio</Link></li>
+              <li><Link href="/pricing" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Pricing</Link></li>
+              <li><Link href="/blog" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Blog</Link></li>
+              <li><Link href="/ai-tools" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">AI Tools</Link></li>
+              <li><Link href="/case-studies" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Case Studies</Link></li>
+              <li><Link href="/career" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Careers</Link></li>
+              <li><Link href="/contact" className="text-sm text-gray-400 hover:text-brand-pink transition-colors">Contact</Link></li>
+            </ul>
+          </div>
+
+          {/* Newsletter */}
           <div>
             <h3 className="font-display font-semibold text-white mb-6">Newsletter</h3>
             <p className="text-sm text-gray-400 mb-4">
@@ -90,8 +109,16 @@ export function Footer() {
                 Subscribe
               </AnimatedButton>
             </form>
+            
+            <div className="mt-6 space-y-3">
+              <h4 className="font-display font-semibold text-white text-sm">Need a Consultation?</h4>
+              <CalendlyButton 
+                text="Book Free Call" 
+                variant="outline" 
+                className="w-full"
+              />
+            </div>
           </div>
-
         </div>
 
         {/* Bottom Bar */}

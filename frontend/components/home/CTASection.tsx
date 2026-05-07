@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { AnimatedButton } from '../common/AnimatedButton'
 import { GradientText } from '../common/GradientText'
+import { CalendlyButton } from '../common/CalendlyButton'
 
 export function CTASection() {
   return (
@@ -38,9 +39,11 @@ export function CTASection() {
             <AnimatedButton href="/contact" size="lg">
               Start Project Now
             </AnimatedButton>
-            <AnimatedButton href="https://calendly.com" variant="outline" size="lg">
-              Schedule a Call
-            </AnimatedButton>
+            <CalendlyButton 
+              text="Schedule a Call" 
+              variant="outline" 
+              size="lg"
+            />
           </div>
         </div>
       </div>

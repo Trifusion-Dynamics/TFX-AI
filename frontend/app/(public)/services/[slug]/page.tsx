@@ -3,6 +3,7 @@ import { Footer } from '@/components/layout/Footer'
 import { SectionHeading } from '@/components/common/SectionHeading'
 import { GlassCard } from '@/components/common/GlassCard'
 import { AnimatedButton } from '@/components/common/AnimatedButton'
+import { CalendlyButton } from '@/components/common/CalendlyButton'
 import { serviceApi } from '@/lib/api/service.api'
 import { notFound } from 'next/navigation'
 import { Check, ArrowLeft, Brain, Code, Smartphone, Database, Zap, Cloud, Palette, Search } from 'lucide-react'
@@ -177,6 +178,16 @@ export default async function ServiceDetailPage({ params }: Props) {
               <AnimatedButton href={`/contact?service=${service.slug}`} size="lg">
                 Start This Project
               </AnimatedButton>
+              
+              {/* Calendly CTA */}
+              <div className="mt-4">
+                <CalendlyButton 
+                  text="Book Free Consultation" 
+                  variant="outline" 
+                  size="sm"
+                  className="w-full"
+                />
+              </div>
             </div>
 
             <div className="flex-1 w-full lg:max-w-md">

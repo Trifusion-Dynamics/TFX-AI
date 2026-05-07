@@ -9,7 +9,9 @@ import Image from 'next/image'
 import { cn } from '@/lib/utils/cn'
 import { GradientText } from '../common/GradientText'
 import { AnimatedButton } from '../common/AnimatedButton'
+import { CalendlyButton } from '../common/CalendlyButton'
 import { useAuthStore } from '@/lib/store/authStore'
+import { Calendar } from 'lucide-react'
 
 const NAV_LINKS = [
   { name: 'Home', href: '/' },
@@ -19,7 +21,6 @@ const NAV_LINKS = [
   { name: 'Blog', href: '/blog' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'AI Tools', href: '/ai-tools' },
-  { name: 'Careers', href: '/career' },
   { name: 'Contact', href: '/contact' },
 ]
 
@@ -87,6 +88,11 @@ export function Navbar() {
               </Link>
             )
           })}
+          {/* Book a Call Link */}
+          <div className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-brand-yellow hover:text-white transition-colors cursor-pointer">
+            <Calendar className="w-4 h-4 mr-1" />
+            <CalendlyButton text="Book a Call" variant="ghost" size="sm" className="p-0 h-auto" />
+          </div>
         </nav>
 
         {/* Actions */}
@@ -141,6 +147,15 @@ export function Navbar() {
                   {link.name}
                 </Link>
               ))}
+              
+              {/* Book a Call Link for Mobile */}
+              <Link
+                href="/book-call"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-brand-yellow hover:bg-white/5 hover:text-white rounded-lg md:px-4 md:py-3"
+              >
+                <Calendar className="w-4 h-4" /> Book a Call
+              </Link>
               
               <div className="h-px bg-dark-border my-1 md:my-2" />
               

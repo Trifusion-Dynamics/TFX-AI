@@ -12,6 +12,16 @@ const ChatWidget = dynamic(() => import('@/components/chatbot/ChatWidget'), {
   ssr: false
 })
 
+// Dynamically import ExitIntentPopup to avoid SSR issues
+const ExitIntentPopup = dynamic(() => import('@/components/common/ExitIntentPopup'), {
+  ssr: false
+})
+
+// Development-only ExitPopupTester
+const ExitPopupTester = dynamic(() => import('@/components/dev/ExitPopupTester'), {
+  ssr: false
+})
+
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
@@ -31,6 +41,8 @@ export function Providers({ children }: { children: ReactNode }) {
       />
       
       <ChatWidget />
+      <ExitIntentPopup />
+      <ExitPopupTester />
     </ThemeProvider>
   )
 }

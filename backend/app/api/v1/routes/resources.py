@@ -6,7 +6,7 @@ import secrets
 from datetime import datetime, timedelta
 import os
 
-from app.db.database import get_db
+from app.db.base import get_db
 from app.models.lead import Lead
 from app.models.newsletter import Newsletter
 from app.schemas.lead import LeadCreate

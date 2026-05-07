@@ -9,6 +9,7 @@ import { GlassCard } from '@/components/common/GlassCard'
 import { AnimatedButton } from '@/components/common/AnimatedButton'
 import { aiToolsApi } from '@/lib/api/ai-tools.api'
 import { Brain, FileText, Sparkles, MessageSquare, Loader2, CheckCircle, AlertTriangle, Copy, RotateCcw, Send, Check } from 'lucide-react'
+import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { cn } from '@/lib/utils/cn'
 
@@ -38,18 +39,21 @@ export default function AIToolsPage() {
                 onClick={() => setActiveTab('resume')}
                 icon={<FileText className="w-4 h-4" />}
                 label="Resume Analyzer"
+                href="/ai-tools/resume-analyzer"
               />
               <TabButton 
                 active={activeTab === 'text'} 
                 onClick={() => setActiveTab('text')}
                 icon={<Sparkles className="w-4 h-4" />}
                 label="Text Generator"
+                href="/ai-tools/text-generator"
               />
               <TabButton 
                 active={activeTab === 'bot'} 
                 onClick={() => setActiveTab('bot')}
                 icon={<MessageSquare className="w-4 h-4" />}
                 label="Q&A Bot"
+                href="/ai-tools/qa-bot"
               />
             </div>
           </div>
@@ -61,6 +65,102 @@ export default function AIToolsPage() {
               {activeTab === 'bot' && <QABot key="bot" />}
             </AnimatePresence>
           </div>
+
+          {/* Try Our AI Tools Section */}
+          <div className="mt-16">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-white mb-4">Try Our AI Tools</h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">
+                Experience the power of AI with our comprehensive suite of tools. Each tool is designed to solve specific challenges and boost your productivity.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Link href="/ai-tools/resume-analyzer">
+                <motion.div
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <GlassCard className="p-8 h-full border-white/5 hover:border-brand-purple/20 transition-all duration-300 group cursor-pointer">
+                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-brand-purple to-brand-purple/60 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                      <FileText className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-brand-purple transition-colors">
+                      Resume Analyzer
+                    </h3>
+                    <p className="text-gray-400 mb-4 leading-relaxed">
+                      Get instant AI-powered analysis of your resume. Check ATS compatibility, section scores, and get actionable improvement suggestions.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <span className="px-2 py-1 bg-brand-purple/20 text-brand-purple rounded text-xs">ATS Check</span>
+                      <span className="px-2 py-1 bg-brand-pink/20 text-brand-pink rounded text-xs">Score Analysis</span>
+                      <span className="px-2 py-1 bg-brand-orange/20 text-brand-orange rounded text-xs">Tips</span>
+                    </div>
+                    <div className="flex items-center text-brand-purple font-semibold group-hover:gap-2 transition-all">
+                      Try Now
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                    </div>
+                  </GlassCard>
+                </motion.div>
+              </Link>
+
+              <Link href="/ai-tools/text-generator">
+                <motion.div
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <GlassCard className="p-8 h-full border-white/5 hover:border-brand-pink/20 transition-all duration-300 group cursor-pointer">
+                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-brand-pink to-brand-pink/60 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                      <Sparkles className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-brand-pink transition-colors">
+                      Text Generator
+                    </h3>
+                    <p className="text-gray-400 mb-4 leading-relaxed">
+                      Create compelling content in seconds. Generate social posts, blog intros, emails, and more with customizable tone and style.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <span className="px-2 py-1 bg-brand-purple/20 text-brand-purple rounded text-xs">Social Posts</span>
+                      <span className="px-2 py-1 bg-brand-pink/20 text-brand-pink rounded text-xs">Emails</span>
+                      <span className="px-2 py-1 bg-brand-orange/20 text-brand-orange rounded text-xs">Blogs</span>
+                    </div>
+                    <div className="flex items-center text-brand-pink font-semibold group-hover:gap-2 transition-all">
+                      Try Now
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                    </div>
+                  </GlassCard>
+                </motion.div>
+              </Link>
+
+              <Link href="/ai-tools/qa-bot">
+                <motion.div
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <GlassCard className="p-8 h-full border-white/5 hover:border-brand-orange/20 transition-all duration-300 group cursor-pointer">
+                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-brand-orange to-brand-orange/60 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                      <MessageSquare className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-brand-orange transition-colors">
+                      Q&A Bot
+                    </h3>
+                    <p className="text-gray-400 mb-4 leading-relaxed">
+                      Get instant answers about TFX AI services, pricing, technology, and more. Our AI assistant is here to help 24/7.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <span className="px-2 py-1 bg-brand-purple/20 text-brand-purple rounded text-xs">24/7 Support</span>
+                      <span className="px-2 py-1 bg-brand-pink/20 text-brand-pink rounded text-xs">Instant</span>
+                      <span className="px-2 py-1 bg-brand-orange/20 text-brand-orange rounded text-xs">Smart</span>
+                    </div>
+                    <div className="flex items-center text-brand-orange font-semibold group-hover:gap-2 transition-all">
+                      Try Now
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                    </div>
+                  </GlassCard>
+                </motion.div>
+              </Link>
+            </div>
+          </div>
         </div>
       </main>
       <Footer />
@@ -68,25 +168,26 @@ export default function AIToolsPage() {
   )
 }
 
-function TabButton({ active, onClick, icon, label }: any) {
+function TabButton({ active, onClick, icon, label, href }: any) {
   return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "relative px-6 py-3 rounded-xl text-sm font-semibold transition-all flex items-center gap-2",
-        active ? "text-white" : "text-gray-400 hover:text-white"
-      )}
-    >
-      {active && (
-        <motion.div
-          layoutId="tool-tab"
-          className="absolute inset-0 bg-brand-pink rounded-xl z-0 shadow-lg shadow-brand-pink/20"
-        />
-      )}
-      <span className="relative z-10 flex items-center gap-2">
-        {icon} {label}
-      </span>
-    </button>
+    <Link href={href}>
+      <div
+        className={cn(
+          "relative px-6 py-3 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 cursor-pointer",
+          active ? "text-white" : "text-gray-400 hover:text-white"
+        )}
+      >
+        {active && (
+          <motion.div
+            layoutId="tool-tab"
+            className="absolute inset-0 bg-brand-pink rounded-xl z-0 shadow-lg shadow-brand-pink/20"
+          />
+        )}
+        <span className="relative z-10 flex items-center gap-2">
+          {icon} {label}
+        </span>
+      </div>
+    </Link>
   )
 }
 

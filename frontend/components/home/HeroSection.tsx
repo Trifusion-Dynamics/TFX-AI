@@ -4,6 +4,7 @@ import { useEffect, useState, lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronDown, Zap } from 'lucide-react'
 import { GradientText } from '../common/GradientText'
+import { CalendlyButton } from '../common/CalendlyButton'
 import { cn } from '@/lib/utils/cn'
 
 // Lazy load non-critical components
@@ -86,6 +87,20 @@ export function HeroSection() {
               View Our Work
             </AnimatedButton>
           </Suspense>
+        </motion.div>
+
+        {/* Calendly CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="flex justify-center"
+        >
+          <CalendlyButton 
+            text="📅 Or book a free call →" 
+            variant="ghost" 
+            size="sm"
+          />
         </motion.div>
 
         {/* Stats Row */}

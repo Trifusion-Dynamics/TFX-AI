@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { GlassCard } from '@/components/common/GlassCard'
 import { AnimatedButton } from '@/components/common/AnimatedButton'
+import { CalendlyButton } from '@/components/common/CalendlyButton'
 import { ArrowLeft, ArrowRight, Calculator, Globe, ShoppingBag, Bot, BarChart3, Smartphone, Link, Palette, Clock, DollarSign, User, Mail, Phone, MessageSquare, Check, ChevronRight } from 'lucide-react'
 
 interface CalculatorData {
@@ -431,13 +432,13 @@ if (showResults) {
               <Mail className="w-5 h-5 mr-2" />
               {isSubmitting ? 'Sending...' : 'Send Me This Estimate'}
             </AnimatedButton>
-            <AnimatedButton 
-              href="https://calendly.com"
+            <CalendlyButton 
+              text=" Book Free Consultation"
               variant="outline" 
               className="flex-1"
-            >
-              📅 Book Free Consultation
-            </AnimatedButton>
+              prefillName={calculatorData.userDetails.name}
+              prefillEmail={calculatorData.userDetails.email}
+            />
           </div>
 
           <div className="text-center">

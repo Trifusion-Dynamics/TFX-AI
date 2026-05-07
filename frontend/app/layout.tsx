@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import { Providers } from './providers'
 
@@ -68,6 +69,7 @@ export const metadata: Metadata = {
 
 
 import { BackToTop } from '@/components/common/BackToTop'
+import { BookingFloatingWidget } from '@/components/common/BookingFloatingWidget'
 
 export default function RootLayout({
   children,
@@ -114,12 +116,24 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
-      </head>
+        
+              </head>
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased min-h-screen flex flex-col`}>
         <Providers>
           {children}
           <BackToTop />
+          <BookingFloatingWidget />
         </Providers>
+        
+        {/* Calendly Integration */}
+        <Script 
+          src="https://assets.calendly.com/assets/external/widget.js"
+          strategy="afterInteractive"
+        />
+        <link 
+          href="https://assets.calendly.com/assets/external/widget.css" 
+          rel="stylesheet"
+        />
       </body>
     </html>
   )

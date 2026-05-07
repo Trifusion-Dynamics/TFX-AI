@@ -134,3 +134,20 @@ export interface LoginResponse {
   access_token: string
 }
 
+// Calendly TypeScript declarations
+declare global {
+  interface Window {
+    Calendly: {
+      initPopupWidget: (options: {
+        url: string
+        prefill?: {
+          name?: string
+          email?: string
+          customAnswers?: Record<string, string>
+        }
+      }) => void
+      closePopupWidget: () => void
+    }
+  }
+}
+

@@ -89,7 +89,7 @@ function CategoryRow({
   )
 }
 
-export default function CookieConsent() {
+export default function CookieConsentFixed() {
   const [mounted, setMounted] = useState(false)
   const [showBanner, setShowBanner] = useState(false)
   const [showDetails, setShowDetails] = useState(false)
@@ -97,13 +97,6 @@ export default function CookieConsent() {
 
   useEffect(() => {
     setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return null
-  }
-
-  useEffect(() => {
     const timer = setTimeout(() => {
       try {
         const stored = localStorage.getItem(STORAGE_KEY)
@@ -163,6 +156,10 @@ export default function CookieConsent() {
     setPreferences((prev) => ({ ...prev, [key]: val }))
   }
 
+  if (!mounted || !showBanner) {
+    return null
+  }
+
   return (
     <AnimatePresence>
       {showBanner && (
@@ -220,7 +217,6 @@ export default function CookieConsent() {
                   {/* Right: buttons */}
                   <div className="flex flex-wrap items-center gap-2 flex-shrink-0 w-full sm:w-auto">
                     <button
-                      id="cookie-customize-btn"
                       onClick={() => setShowDetails(true)}
                       className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 hover:bg-purple-500/10"
                       style={{
@@ -232,14 +228,12 @@ export default function CookieConsent() {
                       Customize
                     </button>
                     <button
-                      id="cookie-reject-btn"
                       onClick={rejectAll}
                       className="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-400 transition-all duration-200 hover:text-gray-200 hover:bg-white/5"
                     >
                       Reject All
                     </button>
                     <button
-                      id="cookie-accept-btn"
                       onClick={acceptAll}
                       className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-semibold text-white transition-all duration-200 hover:opacity-90 active:scale-95"
                       style={{
@@ -288,7 +282,6 @@ export default function CookieConsent() {
                     <span className="text-sm font-semibold text-white">Cookie Preferences</span>
                   </div>
                   <button
-                    id="cookie-detail-close-btn"
                     onClick={() => setShowDetails(false)}
                     className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-500 transition-all duration-150 hover:text-gray-200 hover:bg-white/8"
                     aria-label="Close preferences"
@@ -333,14 +326,12 @@ export default function CookieConsent() {
                   style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
                 >
                   <button
-                    id="cookie-detail-reject-btn"
                     onClick={rejectAll}
                     className="px-4 py-2 rounded-lg text-xs font-medium text-gray-400 transition-all duration-200 hover:text-gray-200 hover:bg-white/5 order-1 sm:order-none"
                   >
                     Reject All
                   </button>
                   <button
-                    id="cookie-save-prefs-btn"
                     onClick={savePreferences}
                     className="flex items-center justify-center gap-1.5 px-5 py-2 rounded-lg text-xs font-semibold text-white transition-all duration-200 hover:opacity-90 active:scale-95"
                     style={{

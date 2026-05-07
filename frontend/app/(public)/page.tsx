@@ -36,9 +36,51 @@ const MOCK_SERVICES: Service[] = [
 ]
 
 const MOCK_PROJECTS: Project[] = [
-  { id: '1', title: 'AgroBrain AI', slug: 'agrobrain', description: 'Desc', short_desc: 'Revolutionizing agriculture with AI-powered crop analysis and yield prediction.', thumbnail: 'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=800&q=80', images: [], tech_stack: ['Next.js', 'FastAPI', 'PyTorch'], category: 'AI', is_featured: true, is_published: true },
-  { id: '2', title: 'Meetoid', slug: 'meetoid', description: 'Desc', short_desc: 'Intelligent video conferencing with real-time translation and automated summaries.', thumbnail: 'https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=800&q=80', images: [], tech_stack: ['WebRTC', 'OpenAI', 'TypeScript'], category: 'SAAS', is_featured: true, is_published: true },
-  { id: '3', title: 'BillEasy', slug: 'billeasy', description: 'Desc', short_desc: 'Modern invoicing and financial management platform for digital agencies.', thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80', images: [], tech_stack: ['React', 'PostgreSQL', 'Node.js'], category: 'WEB', is_featured: true, is_published: true },
+  { 
+    id: '1', 
+    title: 'AgroBrain AI', 
+    slug: 'agrobrain', 
+    description: 'Desc', 
+    short_desc: 'Revolutionizing agriculture with AI-powered crop analysis and yield prediction.', 
+    thumbnail: 'https://picsum.photos/seed/agrobrain/800/600.jpg', 
+    images: [], 
+    tech_stack: ['Next.js', 'FastAPI', 'PyTorch'], 
+    category: 'AI', 
+    is_featured: true, 
+    is_published: true,
+    github_url: 'https://github.com',
+    live_url: 'https://demo.example.com'
+  },
+  { 
+    id: '2', 
+    title: 'Meetoid', 
+    slug: 'meetoid', 
+    description: 'Desc', 
+    short_desc: 'Intelligent video conferencing with real-time translation and automated summaries.', 
+    thumbnail: 'https://picsum.photos/seed/meetoid/800/600.jpg', 
+    images: [], 
+    tech_stack: ['WebRTC', 'OpenAI', 'TypeScript'], 
+    category: 'SAAS', 
+    is_featured: true, 
+    is_published: true,
+    github_url: 'https://github.com',
+    live_url: 'https://demo.example.com'
+  },
+  { 
+    id: '3', 
+    title: 'BillEasy', 
+    slug: 'billeasy', 
+    description: 'Desc', 
+    short_desc: 'Modern invoicing and financial management platform for digital agencies.', 
+    thumbnail: 'https://picsum.photos/seed/billeasy/800/600.jpg', 
+    images: [], 
+    tech_stack: ['React', 'PostgreSQL', 'Node.js'], 
+    category: 'WEB', 
+    is_featured: true, 
+    is_published: true,
+    github_url: 'https://github.com',
+    live_url: 'https://demo.example.com'
+  },
 ]
 
 const MOCK_TESTIMONIALS: Testimonial[] = [

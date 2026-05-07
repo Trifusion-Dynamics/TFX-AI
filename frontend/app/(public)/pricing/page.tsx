@@ -3,6 +3,7 @@ import { Footer } from '@/components/layout/Footer'
 import { SectionHeading } from '@/components/common/SectionHeading'
 import { GlassCard } from '@/components/common/GlassCard'
 import { AnimatedButton } from '@/components/common/AnimatedButton'
+import { CalendlyButton } from '@/components/common/CalendlyButton'
 import QuickCalculator from '@/components/common/QuickCalculator'
 import { pricingApi } from '@/lib/api/pricing.api'
 import { PricingPlan } from '@/types'
@@ -212,6 +213,16 @@ function PricingCard({ plan }: { plan: PricingPlan }) {
       >
         Choose Plan
       </AnimatedButton>
+      
+      {/* Calendly CTA */}
+      <div className="mt-4 pt-4 border-t border-white/10">
+        <CalendlyButton 
+          text="Have questions about this plan? Book a call →" 
+          variant="ghost" 
+          size="sm"
+          className="w-full"
+        />
+      </div>
     </GlassCard>
   )
 }

@@ -165,6 +165,22 @@ export interface ChatRequest {
   page_context?: string
 }
 
+export type PopupVariant = 'A' | 'B'
+
+export interface ExitPopupFormData {
+  name: string
+  email: string
+  website?: string
+  projectType?: string
+}
+
+export interface ExitPopupState {
+  variant: PopupVariant
+  isVisible: boolean
+  isSubmitted: boolean
+  submittedEmail?: string
+}
+
 // Calendly TypeScript declarations
 declare global {
   interface Window {

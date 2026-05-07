@@ -34,6 +34,10 @@ export default function ContactClient() {
       await contactApi.submit(data)
       setIsSubmitted(true)
       toast.success('Message sent successfully!')
+      
+      // Mark that user has submitted contact form this session
+      sessionStorage.setItem('tfxai_form_submitted', 'true')
+      
       reset()
     } catch (error) {
       toast.error('Failed to send message. Please try again.')

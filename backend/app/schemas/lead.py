@@ -9,6 +9,19 @@ from uuid import UUID
 from pydantic import ConfigDict
 
 
+class LeadCreate(BaseModel):
+    """Lead creation schema."""
+    model_config = ConfigDict(from_attributes=True)
+    
+    name: str = Field(..., min_length=2, max_length=100)
+    email: str = Field(..., min_length=5, max_length=255)
+    phone: Optional[str] = Field(None, max_length=20)
+    subject: str = Field(..., min_length=5, max_length=300)
+    message: str = Field(..., min_length=10)
+    source: Optional[str] = Field("contact", max_length=50)
+    status: Optional[str] = Field("new", max_length=20)
+
+
 class LeadCreateRequest(BaseModel):
     """Lead creation request."""
     model_config = ConfigDict(from_attributes=True)

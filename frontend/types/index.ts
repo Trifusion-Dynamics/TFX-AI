@@ -181,6 +181,33 @@ export interface ExitPopupState {
   submittedEmail?: string
 }
 
+export interface Resource {
+  id: string
+  title: string
+  description: string
+  pages: number
+  format: string
+  size: string
+  category: 'AI' | 'SaaS' | 'Performance' | 'Design'
+  preview_image: string | null
+  bullets?: string[]
+}
+
+export interface DownloadRequest {
+  name: string
+  email: string
+  resourceId: string
+  sourcePage?: string
+  subscribeToNewsletter: boolean
+}
+
+export interface ResourceDownloadRequest {
+  name: string
+  email: string
+  resource_id: string
+  source_page?: string
+}
+
 // Calendly TypeScript declarations
 declare global {
   interface Window {

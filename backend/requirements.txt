@@ -16,3 +16,4 @@ httpx
 email-validator
 slowapi
 redis
+reportlab

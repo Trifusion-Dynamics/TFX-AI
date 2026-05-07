@@ -18,6 +18,7 @@ from app.core.config import settings
 from app.core.exceptions import register_exception_handlers
 from app.db.base import init_db, close_db, AsyncSessionLocal, engine
 from app.db.init_db import seed_database
+from app.utils.pdf_generator import generate_all_pdfs
 from app.api.v1.routes import (
     auth,
     user,
@@ -32,6 +33,7 @@ from app.api.v1.routes import (
     ai_tools,
     admin,
     job,
+    resources,
 )
 
 # Configure logging
@@ -63,6 +65,13 @@ async def lifespan(app: FastAPI):
         async with AsyncSessionLocal() as db:
             await seed_database(db)
             logger.info("Database seeded successfully")
+        
+        # Generate PDF resources if they don't exist
+        try:
+            generate_all_pdfs()
+            logger.info("PDF resources generated/checked successfully")
+        except Exception as e:
+            logger.warning(f"PDF generation failed: {e}")
     except Exception as e:
         logger.error(f"Database initialization failed: {e}")
         raise
@@ -196,6 +205,7 @@ app.include_router(case_study.router, prefix="/api/v1/case-studies", tags=["Case
 app.include_router(ai_tools.router, prefix="/api/v1/ai-tools", tags=["AI Tools"])
 app.include_router(admin.router, prefix="/api/v1/admin", tags=["Admin"])
 app.include_router(job.router, prefix="/api/v1/jobs", tags=["Jobs"])
+app.include_router(resources.router, prefix="/api/v1/resources", tags=["Resources"])
 
 # Graceful shutdown event handler
 @app.on_event("shutdown")
